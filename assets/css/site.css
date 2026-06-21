@@ -489,21 +489,19 @@ a:hover {
 
 .contact-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.85fr) 15rem;
-  gap: 3rem;
+  grid-template-columns: minmax(0, 2.25fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 4rem;
   align-items: start;
 }
 
 .contact-banner {
   margin: 0 0 3rem;
-  overflow: hidden;
 }
 
 .contact-banner img {
+  display: block;
   width: 100%;
   height: auto;
-  max-height: 360px;
-  object-fit: cover;
 }
 
 .contact-portrait {
@@ -534,13 +532,13 @@ a:hover {
 .contact-copy p,
 .contact-copy blockquote {
   max-width: 50rem;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .contact-copy blockquote {
   margin: 0 0 1.75rem;
   font-style: italic;
-  color: #333;
+  color: var(--text);
 }
 
 .contact-copy cite {
@@ -551,10 +549,7 @@ a:hover {
 }
 
 .contact-panel {
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 1.5rem;
-  background: var(--surface);
+  padding: 0;
 }
 
 .contact-panel h2 {
@@ -578,7 +573,7 @@ a:hover {
 
 .contact-panel h1 {
   margin: 0 0 1.5rem;
-  font-size: 1.9rem;
+  font-size: 2rem;
   line-height: 1.1;
 }
 
