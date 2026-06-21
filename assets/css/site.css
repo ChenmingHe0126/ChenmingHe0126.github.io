@@ -363,6 +363,83 @@ a:hover {
   margin: 0;
 }
 
+.cv-actions {
+  max-width: 60rem;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-download {
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.55rem 1.1rem;
+  border-radius: 4px;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.btn-download:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media print {
+  .site-header,
+  .cv-actions,
+  .skip-link {
+    display: none !important;
+  }
+
+  html {
+    font-size: 10.5pt;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .page-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .cv {
+    max-width: none;
+  }
+
+  .cv-section {
+    margin-bottom: 1.1rem;
+  }
+
+  .cv-entry,
+  .cv-subentry {
+    break-inside: avoid;
+  }
+
+  .cv-section > h2 {
+    break-after: avoid;
+  }
+
+  .cv-header {
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .cv-contact a,
+  .cv-entry a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  @page {
+    margin: 1.4cm;
+  }
+}
+
 @media (max-width: 640px) {
   .cv-entry-head,
   .cv-entry-sub {
