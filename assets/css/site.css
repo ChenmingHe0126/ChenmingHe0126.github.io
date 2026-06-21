@@ -705,8 +705,8 @@ a:hover {
 
 .cs-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
   margin: 1.75rem 0;
 }
 
