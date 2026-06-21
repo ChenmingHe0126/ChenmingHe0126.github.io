@@ -412,13 +412,24 @@ a:hover {
     font-size: 11pt;
   }
 
-  .cv-entry,
-  .cv-subentry {
+  .cv-section > h2 {
+    break-after: avoid;
+  }
+
+  .cv-entry-head,
+  .cv-entry-sub,
+  .cv-project {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  .cv-entry li {
     break-inside: avoid;
   }
 
-  .cv-section > h2 {
-    break-after: avoid;
+  .cv-entry ul {
+    orphans: 2;
+    widows: 2;
   }
 
   .cv-contact a,
