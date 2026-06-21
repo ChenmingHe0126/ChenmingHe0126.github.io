@@ -242,15 +242,144 @@ a:hover {
   font-weight: 700;
 }
 
-.cv-stack {
-  display: grid;
-  gap: 2rem;
+.cv {
+  max-width: 60rem;
+  margin: 0 auto;
 }
 
-.cv-stack img {
-  width: 100%;
-  border: 1px solid var(--line);
-  box-shadow: 0 1rem 2rem rgba(20, 20, 20, 0.08);
+.cv-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cv-header h1 {
+  margin: 0 0 0.6rem;
+  font-size: 2.2rem;
+}
+
+.cv-contact {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.cv-contact a {
+  color: var(--accent);
+}
+
+.cv-contact span {
+  margin: 0 0.4rem;
+  color: var(--line);
+}
+
+.cv-section {
+  margin-bottom: 2.5rem;
+}
+
+.cv-section > h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--text);
+}
+
+.cv-entry {
+  margin-bottom: 1.5rem;
+}
+
+.cv-entry-head,
+.cv-entry-sub {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.5rem;
+}
+
+.cv-org {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.cv-role {
+  font-style: italic;
+  color: #333;
+}
+
+.cv-loc,
+.cv-date {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.cv-entry ul {
+  margin: 0.6rem 0 0;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.cv-entry li {
+  margin-bottom: 0.3rem;
+}
+
+.cv-subentry {
+  margin: 0.85rem 0 0 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--line);
+}
+
+.cv-project {
+  margin: 0.85rem 0 0.1rem;
+  font-weight: 700;
+}
+
+.cv-note {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.cv-skills {
+  margin: 0;
+}
+
+.cv-skills > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.cv-skills dt {
+  font-weight: 700;
+}
+
+.cv-skills dd {
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .cv-entry-head,
+  .cv-entry-sub {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .cv-loc,
+  .cv-date {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .cv-skills > div {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
 }
 
 .contact-layout {
