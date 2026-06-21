@@ -410,10 +410,29 @@ a:hover {
     max-width: none;
     padding: 0;
     font-size: 11pt;
+    line-height: 1.22;
+  }
+
+  .cv-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .cv-header h1 {
+    font-size: 17pt;
+    margin-bottom: 0.15rem;
+  }
+
+  .cv-section {
+    margin-bottom: 0.9rem;
   }
 
   .cv-section > h2 {
+    margin-bottom: 0.35rem;
     break-after: avoid;
+  }
+
+  .cv-entry {
+    margin-bottom: 0.55rem;
   }
 
   .cv-entry-head,
@@ -423,13 +442,19 @@ a:hover {
     break-after: avoid;
   }
 
+  .cv-entry ul {
+    margin-top: 0.25rem;
+    orphans: 2;
+    widows: 2;
+  }
+
   .cv-entry li {
+    margin-bottom: 0.1rem;
     break-inside: avoid;
   }
 
-  .cv-entry ul {
-    orphans: 2;
-    widows: 2;
+  .cv-subentry {
+    margin-top: 0.4rem;
   }
 
   .cv-contact a,
@@ -439,7 +464,7 @@ a:hover {
   }
 
   @page {
-    margin: 2.5cm;
+    margin: 2cm;
   }
 }
 
