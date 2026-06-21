@@ -17,6 +17,22 @@
     `).join("");
   }
 
+  function esc(value) {
+    return String(value).replace(/[&<>"]/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"
+    }[c]));
+  }
+
+  function renderBlocks(slug, blocks) {
+    return blocks.map((block) => {
+      if (block.t === "img") {
+        return `<figure class="cs-figure"><img src="assets/img/projects/${slug}/${block.f}" alt="" loading="lazy"></figure>`;
+      }
+      const tag = ["h2", "h3", "h4", "blockquote"].includes(block.g) ? block.g : "p";
+      return `<${tag}>${esc(block.x)}</${tag}>`;
+    }).join("");
+  }
+
   function renderProject() {
     const target = document.getElementById("project-detail");
     if (!target) return;
@@ -38,20 +54,25 @@
     }
 
     document.title = `${project.title} - Chenming He`;
+    const content = (window.PROJECT_CONTENT || {})[slug] || [];
+    const meta = [
+      project.timeframe ? `<div><dt>Date</dt><dd>${esc(project.timeframe)}</dd></div>` : "",
+      project.context ? `<div><dt>Context</dt><dd>${esc(project.context)}</dd></div>` : "",
+      project.role ? `<div><dt>Role</dt><dd>${esc(project.role)}</dd></div>` : "",
+    ].join("");
+
+    const body = content.length
+      ? renderBlocks(slug, content)
+      : `<p>${esc(project.summary || "")}</p><p>${esc(project.details || "")}</p>`;
+
     target.innerHTML = `
-      <div>
-        <img src="${project.image}" alt="${project.title}">
-      </div>
-      <div>
-        <p class="project-kicker">${project.category}</p>
-        <h1>${project.title}</h1>
-        <dl class="project-meta">
-          ${project.timeframe ? `<div><dt>Date</dt><dd>${project.timeframe}</dd></div>` : ""}
-          ${project.context ? `<div><dt>Context</dt><dd>${project.context}</dd></div>` : ""}
-          ${project.role ? `<div><dt>Role</dt><dd>${project.role}</dd></div>` : ""}
-        </dl>
-        <p>${project.summary}</p>
-        <p>${project.details}</p>
+      <header class="cs-head">
+        ${project.category ? `<p class="project-kicker">${esc(project.category)}</p>` : ""}
+        <h1>${esc(project.title)}</h1>
+        ${meta ? `<dl class="project-meta">${meta}</dl>` : ""}
+      </header>
+      <div class="case-study">
+        ${body}
       </div>
     `;
 
@@ -61,8 +82,8 @@
     const previous = projects[(index - 1 + projects.length) % projects.length];
     const next = projects[(index + 1) % projects.length];
     pagination.innerHTML = `
-      <a href="${projectUrl(previous.slug)}">Previous: ${previous.title}</a>
-      <a href="${projectUrl(next.slug)}">Next: ${next.title}</a>
+      <a href="${projectUrl(previous.slug)}">Previous: ${esc(previous.title)}</a>
+      <a href="${projectUrl(next.slug)}">Next: ${esc(next.title)}</a>
     `;
   }
 

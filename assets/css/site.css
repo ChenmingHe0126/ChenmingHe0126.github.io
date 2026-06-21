@@ -86,6 +86,23 @@ a:hover {
   font-size: 0.82rem;
 }
 
+.social-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+.social-nav a:hover {
+  color: var(--accent);
+}
+
+.social-nav svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
 .site-nav a[aria-current="page"] {
   color: var(--accent-2);
 }
@@ -123,8 +140,8 @@ a:hover {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
 }
 
 .project-card {
@@ -132,7 +149,6 @@ a:hover {
   display: block;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  min-height: 25rem;
   background: var(--surface);
   border-radius: 0;
 }
@@ -146,19 +162,47 @@ a:hover {
 
 .project-card span {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  max-width: calc(100% - 2rem);
-  padding: 0.65rem 0.8rem;
-  background: rgba(255, 255, 255, 0.92);
+  left: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 2;
+  max-width: calc(100% - 2.5rem);
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.45rem;
   font-weight: 700;
+  line-height: 1.15;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(246, 248, 245, 0);
+  transition: background 240ms ease;
+  pointer-events: none;
 }
 
 .project-card:hover img {
-  transform: scale(1.025);
-  filter: saturate(0.9);
+  transform: scale(1.03);
+  filter: brightness(1.08) saturate(0.96);
+}
+
+.project-card:hover::after {
+  background: rgba(246, 248, 245, 0.5);
+}
+
+.project-card:hover span {
+  opacity: 1;
+  transform: none;
+}
+
+.project-card:focus-visible span {
+  opacity: 1;
+  transform: none;
 }
 
 .publication-grid {
@@ -274,39 +318,27 @@ a:hover {
   font-weight: 700;
 }
 
-.project-detail {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
-  gap: 3rem;
-  align-items: start;
+.cs-head {
+  max-width: 70rem;
+  margin: 0 auto 2.5rem;
 }
 
-.project-detail img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.project-detail h1 {
-  margin: 0 0 0.75rem;
-  font-size: 2rem;
-  line-height: 1.15;
+.cs-head h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.2rem;
+  line-height: 1.12;
 }
 
 .project-kicker {
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
   color: var(--accent-2);
   font-weight: 700;
-}
-
-.project-detail p {
-  line-height: 1.65;
 }
 
 .project-meta {
   display: grid;
   gap: 0.75rem;
-  margin: 1.5rem 0;
+  margin: 1.5rem 0 0;
   padding: 1rem 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -324,6 +356,50 @@ a:hover {
 
 .project-meta dd {
   margin: 0;
+}
+
+.case-study {
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.case-study h2 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 2.75rem 0 1rem;
+}
+
+.case-study h3 {
+  font-size: 1.3rem;
+  line-height: 1.25;
+  margin: 2.25rem 0 0.85rem;
+}
+
+.case-study h4 {
+  font-size: 1.08rem;
+  margin: 1.75rem 0 0.6rem;
+}
+
+.case-study p {
+  line-height: 1.75;
+  margin: 0 0 1.15rem;
+}
+
+.case-study blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--accent);
+  color: #383838;
+}
+
+.cs-figure {
+  margin: 1.75rem 0;
+}
+
+.cs-figure img {
+  width: 100%;
+  height: auto;
+  background: var(--surface);
 }
 
 .project-pagination {
@@ -356,15 +432,13 @@ a:hover {
     gap: 1rem;
   }
 
-  .project-grid,
-  .publication-grid,
-  .project-detail,
-  .contact-layout {
-    grid-template-columns: 1fr;
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .project-card {
-    min-height: 18rem;
+  .publication-grid,
+  .contact-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -372,6 +446,10 @@ a:hover {
   .site-nav,
   .social-nav {
     gap: 0.8rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
   }
 
   .intro-row {
