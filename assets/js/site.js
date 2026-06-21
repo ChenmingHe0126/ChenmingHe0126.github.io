@@ -23,46 +23,56 @@
     }[c]));
   }
 
-  function renderBlocks(slug, blocks) {
-    let titleSeen = false;
-    let subtitleSlot = false;
-    return blocks.map((block) => {
-      if (block.t === "img") {
-        subtitleSlot = false;
-        return `<figure class="cs-figure"><img src="assets/img/projects/${slug}/${block.f}" alt="" loading="lazy"></figure>`;
+  function imgTag(slug, block) {
+    return `<img src="assets/img/projects/${slug}/${block.f}" alt="" loading="lazy">`;
+  }
+
+  function isHeadingTag(g) {
+    return g === "h2" || g === "h3" || g === "h4";
+  }
+
+  function titleHtml(text) {
+    const parts = text.split(" | ");
+    const head = esc(parts.shift());
+    const rest = parts.length ? " | " + esc(parts.join(" | ")) : "";
+    return `<h2 class="cs-title"><span class="cs-accent">${head}</span>${rest}</h2>`;
+  }
+
+  // Short intro line: bold the [Label] for bracket metadata, else bold-italic subtitle
+  function introLine(text) {
+    const m = /^\s*(\[[^\]]+\])([\s\S]*)$/.exec(text);
+    if (m) return `<p class="cs-meta"><strong>${esc(m[1])}</strong>${esc(m[2])}</p>`;
+    return `<p class="cs-subtitle">${esc(text)}</p>`;
+  }
+
+  // Paragraph (abstract / body): bold the [Label] if present
+  function para(text) {
+    const m = /^\s*(\[[^\]]+\])([\s\S]*)$/.exec(text);
+    if (m) return `<p><strong>${esc(m[1])}</strong>${esc(m[2])}</p>`;
+    return `<p>${esc(text)}</p>`;
+  }
+
+  function bodyHtml(slug, blocks) {
+    const out = [];
+    let i = 0;
+    while (i < blocks.length) {
+      const b = blocks[i];
+      if (b.t === "img") {
+        const run = [];
+        while (i < blocks.length && blocks[i].t === "img") { run.push(blocks[i]); i++; }
+        if (run.length === 1) {
+          out.push(`<figure class="cs-figure">${imgTag(slug, run[0])}</figure>`);
+        } else {
+          out.push(`<div class="cs-gallery">${run.map((r) => `<figure>${imgTag(slug, r)}</figure>`).join("")}</div>`);
+        }
+      } else {
+        if (isHeadingTag(b.g)) out.push(`<${b.g}>${esc(b.x)}</${b.g}>`);
+        else if (b.g === "blockquote") out.push(`<blockquote>${esc(b.x)}</blockquote>`);
+        else out.push(para(b.x));
+        i++;
       }
-
-      const isHeading = ["h2", "h3", "h4"].includes(block.g);
-      const text = block.x;
-
-      // Project title (first heading): accent-color the part before " | "
-      if (block.g === "h2" && !titleSeen) {
-        titleSeen = true;
-        subtitleSlot = true;
-        const parts = text.split(" | ");
-        const head = esc(parts.shift());
-        const rest = parts.length ? " | " + esc(parts.join(" | ")) : "";
-        return `<h2><span class="cs-accent">${head}</span>${rest}</h2>`;
-      }
-
-      // Bracketed metadata lines: bold the [Label]
-      const m = !isHeading && /^\s*(\[[^\]]+\])([\s\S]*)$/.exec(text);
-      if (m) {
-        subtitleSlot = false;
-        const short = m[2].trim().length < 80;
-        return `<p class="${short ? "cs-meta" : ""}"><strong>${esc(m[1])}</strong>${esc(m[2])}</p>`;
-      }
-
-      // Context line directly after the title: bold italic
-      if (!isHeading && subtitleSlot) {
-        subtitleSlot = false;
-        return `<p class="cs-subtitle">${esc(text)}</p>`;
-      }
-
-      subtitleSlot = false;
-      const tag = isHeading || block.g === "blockquote" ? block.g : "p";
-      return `<${tag}>${esc(text)}</${tag}>`;
-    }).join("");
+    }
+    return out.join("");
   }
 
   function renderProject() {
@@ -86,27 +96,48 @@
     }
 
     document.title = `${project.title} - Chenming He`;
-    const content = (window.PROJECT_CONTENT || {})[slug] || [];
-    const meta = [
-      project.timeframe ? `<div><dt>Date</dt><dd>${esc(project.timeframe)}</dd></div>` : "",
-      project.context ? `<div><dt>Context</dt><dd>${esc(project.context)}</dd></div>` : "",
-      project.role ? `<div><dt>Role</dt><dd>${esc(project.role)}</dd></div>` : "",
-    ].join("");
+    const blocks = (window.PROJECT_CONTENT || {})[slug] || [];
 
-    const body = content.length
-      ? renderBlocks(slug, content)
-      : `<p>${esc(project.summary || "")}</p><p>${esc(project.details || "")}</p>`;
+    // Leading images -> banner
+    let i = 0;
+    const banner = [];
+    while (i < blocks.length && blocks[i].t === "img") { banner.push(blocks[i]); i++; }
 
-    target.innerHTML = `
-      <header class="cs-head">
-        ${project.category ? `<p class="project-kicker">${esc(project.category)}</p>` : ""}
-        <h1>${esc(project.title)}</h1>
-        ${meta ? `<dl class="project-meta">${meta}</dl>` : ""}
-      </header>
-      <div class="case-study">
-        ${body}
-      </div>
-    `;
+    // Two-column intro: left = title + subtitle + metadata, right = abstract
+    const left = [];
+    const right = [];
+    if (blocks[i] && blocks[i].g === "h2") {
+      left.push(titleHtml(blocks[i].x));
+      i++;
+      while (i < blocks.length) {
+        const b = blocks[i];
+        if (b.t === "img" || isHeadingTag(b.g)) break;
+        const t = b.x.trim();
+        if (/^\[abstract/i.test(t)) break;             // marked abstract -> right column
+        if (t[0] !== "[" && t.length >= 120) break;    // unmarked long paragraph -> abstract
+        left.push(introLine(t));
+        i++;
+      }
+      while (i < blocks.length) {
+        const b = blocks[i];
+        if (b.t === "img" || isHeadingTag(b.g)) break;
+        right.push(para(b.x));
+        i++;
+      }
+    } else {
+      left.push(`<h2 class="cs-title"><span class="cs-accent">${esc(project.title)}</span></h2>`);
+    }
+
+    const bodyBlocks = banner.slice(1).concat(blocks.slice(i));
+
+    let html = "";
+    if (banner.length) html += `<figure class="cs-banner">${imgTag(slug, banner[0])}</figure>`;
+    html += `<div class="cs-intro"><div class="cs-intro-main">${left.join("")}</div>`;
+    if (right.length) html += `<aside class="cs-intro-aside">${right.join("")}</aside>`;
+    html += `</div>`;
+    if (bodyBlocks.length) html += `<div class="cs-body">${bodyHtml(slug, bodyBlocks)}</div>`;
+
+    target.innerHTML = html;
 
     const pagination = document.getElementById("project-pagination");
     if (!pagination) return;

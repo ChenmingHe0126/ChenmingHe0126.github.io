@@ -619,38 +619,77 @@ a:hover {
   margin: 0;
 }
 
-.case-study {
-  max-width: 70rem;
+.cs-banner {
+  margin: 0 calc(-1 * var(--gutter)) 2.5rem;
+}
+
+.cs-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cs-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 76rem;
+  margin: 0 auto 2.75rem;
+  align-items: start;
+}
+
+.cs-title {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.cs-accent {
+  color: #779fe6;
+}
+
+.cs-intro .cs-subtitle {
+  margin: 0 0 1.25rem;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.cs-intro .cs-meta {
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+}
+
+.cs-intro-aside p {
+  margin: 0 0 1rem;
+  line-height: 1.7;
+}
+
+.cs-body {
+  max-width: 76rem;
   margin: 0 auto;
 }
 
-.case-study h2 {
-  font-size: 1.6rem;
+.cs-body h2,
+.cs-body h3 {
+  margin: 2.5rem 0 1rem;
+  font-size: 1.8rem;
   line-height: 1.2;
-  margin: 2.75rem 0 1rem;
 }
 
-.case-study h3 {
-  font-size: 1.3rem;
-  line-height: 1.25;
-  margin: 2.25rem 0 0.85rem;
-}
-
-.case-study h4 {
-  font-size: 1.08rem;
+.cs-body h4 {
   margin: 1.75rem 0 0.6rem;
+  font-size: 1.15rem;
 }
 
-.case-study p {
-  line-height: 1.75;
+.cs-body p {
   margin: 0 0 1.15rem;
+  line-height: 1.75;
 }
 
-.case-study blockquote {
+.cs-body blockquote {
   margin: 1.5rem 0;
   padding-left: 1.25rem;
   border-left: 3px solid var(--accent);
-  color: #383838;
 }
 
 .cs-figure {
@@ -658,24 +697,37 @@ a:hover {
 }
 
 .cs-figure img {
+  display: block;
   width: 100%;
   height: auto;
   background: var(--surface);
 }
 
-.cs-accent {
-  color: #779fe6;
+.cs-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0;
 }
 
-.case-study .cs-subtitle {
-  margin: 0.25rem 0 1.25rem;
-  font-style: italic;
-  font-weight: 700;
+.cs-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--surface);
 }
 
-.case-study .cs-meta {
-  margin: 0 0 0.4rem;
-  line-height: 1.5;
+@media (max-width: 900px) {
+  .cs-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .cs-gallery {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project-pagination {
