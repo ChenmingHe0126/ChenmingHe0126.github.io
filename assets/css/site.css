@@ -58,6 +58,12 @@ a:hover {
 }
 
 .site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(20, 20, 20, 0.04);
+}
+
+.site-header-inner {
   display: grid;
   grid-template-columns: minmax(10rem, 1fr) auto auto;
   align-items: center;
@@ -427,7 +433,7 @@ a:hover {
     --gutter: 1.5rem;
   }
 
-  .site-header {
+  .site-header-inner {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
