@@ -1,0 +1,133 @@
+/* General Styling */
+body {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to bottom right, #1e1e2f, #3c3c5c);
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Title & Text */
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #f8f8f8;
+}
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #cccccc;
+}
+
+/* Canvas Container */
+#canvas-container {
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Buttons */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Button Styling */
+#play-button {
+    background: linear-gradient(45deg, #ff7eb3, #ff758c);
+}
+#play-button:hover {
+    background: linear-gradient(45deg, #ff4f7b, #ff5f85);
+}
+#clear-button {
+    background: linear-gradient(45deg, #6a85b6, #bac8e0);
+}
+#clear-button:hover {
+    background: linear-gradient(45deg, #5074a7, #a4b4d6);
+}
+#guidance-button {
+    background: linear-gradient(45deg, #ffcc67, #ffaa33);
+}
+#guidance-button:hover {
+    background: linear-gradient(45deg, #ffb547, #ff9623);
+}
+
+video {
+    position: absolute;
+    z-index: 0; 
+    visibility: hidden; 
+  }
+  
+/* Canvas */
+canvas {
+    border-radius: 8px;
+    position: relative;
+    z-index: 1; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Toggle Switch */
+.switch-container {
+    margin: 15px 0;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+input:checked + .slider:before {
+    transform: translateX(26px);
+}

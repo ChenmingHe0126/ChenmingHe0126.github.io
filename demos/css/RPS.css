@@ -1,0 +1,75 @@
+body {
+    font-family: "Inter";
+    text-align: center;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+.game-container {
+    background: rgb(252, 252, 253);
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.buttons {
+    margin: 20px 0;
+}
+
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.choice {
+    background-color: #c5e5ff;
+    color: rgb(35, 36, 39);
+}
+
+.choice:hover {
+    background-color:rgb(65, 132, 203);
+}
+
+#reset {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#reset:hover {
+    background-color: #c0392b;
+}
+
+.result-container {
+    margin-top: 20px;
+}
+
+.result {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.home-container {
+    background: rgb(220, 220, 220);
+    max-width: 70px;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-container a {
+    color: #333;
+    text-decoration: none;
+}
+

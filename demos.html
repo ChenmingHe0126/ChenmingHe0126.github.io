@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project - Chenming He</title>
-    <meta name="description" content="Project detail from the portfolio of Chenming He.">
+    <title>Demos - Chenming He</title>
+    <meta name="description" content="Interactive coding demos by Chenming He: games, generative sketches, and audiovisual experiments.">
     <link rel="stylesheet" href="assets/css/site.css">
   </head>
-  <body data-page="project">
+  <body data-page="demos">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="site-header-inner">
       <a class="site-title" href="index.html">Chenming He</a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" aria-current="page">Projects</a>
-        <a href="demos.html">Demos</a>
+        <a href="index.html">Projects</a>
+        <a href="demos.html" aria-current="page">Demos</a>
         <a href="publications.html">Publications</a>
         <a href="cv.html">CV</a>
         <a href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noreferrer">DeadFish</a>
@@ -29,14 +29,29 @@
       </div>
     </header>
 
-    <main id="main" class="page-shell project-page">
-      <a class="back-link" href="index.html">Back to Projects</a>
-      <article id="project-detail" class="project-article" aria-live="polite"></article>
-      <nav id="project-pagination" class="project-pagination" aria-label="Project pagination"></nav>
-    </main>
+    <main id="main" class="page-shell">
+      <section class="intro-row">
+        <h1>Demos</h1>
+      </section>
 
-    <script src="assets/js/projects.js"></script>
-    <script src="assets/js/project-content.js"></script>
-    <script src="assets/js/site.js"></script>
+      <section class="project-grid demo-grid" aria-label="Interactive demos">
+        <a class="project-card demo-card" href="demos/html/RPS.html">
+          <img src="demos/images/rps.png" alt="Paper Rock Scissors">
+          <span>Paper Rock Scissors</span>
+        </a>
+        <a class="project-card demo-card" href="demos/html/drawingApp.html">
+          <img src="demos/images/drawingApp.JPG" alt="Drawing App">
+          <span>Drawing App</span>
+        </a>
+        <a class="project-card demo-card" href="demos/html/multiAgent.html">
+          <img src="demos/images/multiAgent.png" alt="BasicAgentSystem">
+          <span>BasicAgentSystem</span>
+        </a>
+        <a class="project-card demo-card" href="demos/html/boids.html">
+          <img src="demos/images/boids.png" alt="Boids &amp; Music">
+          <span>Boids &amp; Music</span>
+        </a>
+      </section>
+    </main>
   </body>
 </html>
