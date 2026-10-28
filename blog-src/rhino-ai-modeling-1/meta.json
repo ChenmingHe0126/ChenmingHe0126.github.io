@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-27",
+  "part": 1,
+  "title": {
+    "zh": "用AI在Rhino里建模（上）",
+    "en": "Modeling in Rhino with AI (Part 1)"
+  },
+  "summary": {
+    "zh": "安装 Rhino MCP，让 AI 建水壶、牛牛和旋转楼梯，再试试 Grasshopper。",
+    "en": "Installing Rhino MCP and letting AI model a kettle, the cow and a spiral staircase, then trying Grasshopper."
+  },
+  "series": {
+    "zh": "用AI在Rhino里建模",
+    "en": "Modeling in Rhino with AI"
+  },
+  "series_id": "rhino-ai-modeling",
+  "author": "Chenming He",
+  "cover": "images/cover.png",
+  "tags": [
+    "Rhino",
+    "MCP",
+    "AI",
+    "Grasshopper",
+    "Claude Code"
+  ],
+  "links": {
+    "bilibili": "",
+    "youtube": "",
+    "wechat": ""
+  }
+}

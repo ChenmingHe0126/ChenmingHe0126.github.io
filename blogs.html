@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blogs - Chenming He</title>
+    <meta name="description" content="Blog posts by Chenming He on AI, coding and design tools, in Chinese and English.">
+    <link rel="stylesheet" href="assets/css/site.css">
+    <link rel="stylesheet" href="assets/css/blog.css">
+    <link rel="canonical" href="https://chenminghe0126.github.io/blogs.html">
+    <script>
+(function () {
+  var q = new URLSearchParams(location.search).get("lang"), s = null;
+  try { s = localStorage.getItem("blog-lang"); } catch (e) {}
+  var l = q === "zh" || q === "en" ? q : s === "zh" || s === "en" ? s : (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+  document.documentElement.setAttribute("data-lang", l);
+  document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
+})();
+</script>
+  </head>
+  <body data-page="blogs">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+      <a class="site-title" href="index.html">Chenming He</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="demos.html">Demos</a>
+        <a href="blogs.html" aria-current="page">Blogs</a>
+        <a href="publications.html">Publications</a>
+        <a href="cv.html">CV</a>
+        <a href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noreferrer">DeadFish</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <nav class="social-nav" aria-label="Social links">
+        <a href="https://instagram.com/chenming_he?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.youtube.com/@chenminghe8218/featured" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
+        <a href="http://linkedin.com/in/chenminghe" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5 2.5 2.5 0 0 0 4.98 3.5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg></a>
+        <a href="https://space.bilibili.com/38767929" target="_blank" rel="noreferrer" aria-label="Bilibili"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5.5 4.5 3M17 5.5 19.5 3"/><rect x="2.5" y="5.5" width="19" height="13.5" rx="3.5"/><path d="M8.5 10.5v2.5M15.5 10.5v2.5"/></svg></a>
+      </nav>
+      </div>
+    </header>
+
+    <main id="main" class="page-shell blog-shell">
+      <section class="blog-intro">
+        <div>
+          <h1>Blogs</h1>
+          <p><span data-lang="zh" lang="zh-CN">每期视频的图文版：AI、编程与设计工具的真实使用记录。</span><span data-lang="en" lang="en">Written versions of my videos: hands-on notes on AI, coding and design tools.</span></p>
+        </div>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-set-lang="zh" lang="zh-CN">中文</button>
+          <button type="button" data-set-lang="en" lang="en">EN</button>
+        </div>
+      </section>
+      <section class="blog-list" aria-label="Posts">
+        <a class="blog-card" href="blog/rhino-ai-modeling-1.html">
+          <div class="blog-card-cover"><img src="assets/blog/rhino-ai-modeling-1/cover.webp" alt="" width="1921" height="819" loading="lazy"></div>
+          <div class="blog-card-text">
+            <p class="post-kicker"><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模 · 第 1 篇</span><span data-lang="en" lang="en">Modeling in Rhino with AI · Part 1</span></p>
+            <h2><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（上）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 1)</span></h2>
+            <p class="blog-card-dek"><span data-lang="zh" lang="zh-CN">安装 Rhino MCP，让 AI 建水壶、牛牛和旋转楼梯，再试试 Grasshopper。</span><span data-lang="en" lang="en">Installing Rhino MCP and letting AI model a kettle, the cow and a spiral staircase, then trying Grasshopper.</span></p>
+            <p class="post-meta"><span data-lang="zh" lang="zh-CN">2026 年 10 月 27 日 · 7 分钟阅读</span><span data-lang="en" lang="en">October 27, 2026 · 11 min read</span></p>
+          </div>
+        </a>
+        <a class="blog-card" href="blog/rhino-ai-modeling-2.html">
+          <div class="blog-card-cover"><img src="assets/blog/rhino-ai-modeling-2/cover.webp" alt="" width="1920" height="819" loading="lazy"></div>
+          <div class="blog-card-text">
+            <p class="post-kicker"><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模 · 第 2 篇</span><span data-lang="en" lang="en">Modeling in Rhino with AI · Part 2</span></p>
+            <h2><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（下）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 2)</span></h2>
+            <p class="blog-card-dek"><span data-lang="zh" lang="zh-CN">换 GPT、GLM、DeepSeek 和本地模型再试一遍，效果和问题都在这篇。</span><span data-lang="en" lang="en">Trying it again with GPT, GLM, DeepSeek and a local model: the results and the problems are all here.</span></p>
+            <p class="post-meta"><span data-lang="zh" lang="zh-CN">2026 年 10 月 27 日 · 7 分钟阅读</span><span data-lang="en" lang="en">October 27, 2026 · 12 min read</span></p>
+          </div>
+        </a>
+      </section>
+    </main>
+    <script src="assets/js/blog.js"></script>
+  </body>
+</html>

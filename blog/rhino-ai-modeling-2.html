@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用AI在Rhino里建模（下） · Modeling in Rhino with AI (Part 2) - Chenming He</title>
+    <meta name="description" content="Trying it again with GPT, GLM, DeepSeek and a local model: the results and the problems are all here.">
+    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="canonical" href="https://chenminghe0126.github.io/blog/rhino-ai-modeling-2.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Modeling in Rhino with AI (Part 2) | 用AI在Rhino里建模（下）">
+    <meta property="og:description" content="Trying it again with GPT, GLM, DeepSeek and a local model: the results and the problems are all here.">
+    <meta property="og:image" content="https://chenminghe0126.github.io/assets/blog/rhino-ai-modeling-2/cover.jpg">
+    <meta property="og:url" content="https://chenminghe0126.github.io/blog/rhino-ai-modeling-2.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script>
+(function () {
+  var q = new URLSearchParams(location.search).get("lang"), s = null;
+  try { s = localStorage.getItem("blog-lang"); } catch (e) {}
+  var l = q === "zh" || q === "en" ? q : s === "zh" || s === "en" ? s : (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+  document.documentElement.setAttribute("data-lang", l);
+  document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
+})();
+</script>
+  </head>
+  <body data-page="blogs" data-title-zh="用AI在Rhino里建模（下） - Chenming He" data-title-en="Modeling in Rhino with AI (Part 2) - Chenming He">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+      <a class="site-title" href="../index.html">Chenming He</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../demos.html">Demos</a>
+        <a href="../blogs.html" aria-current="page">Blogs</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../cv.html">CV</a>
+        <a href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noreferrer">DeadFish</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <nav class="social-nav" aria-label="Social links">
+        <a href="https://instagram.com/chenming_he?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.youtube.com/@chenminghe8218/featured" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
+        <a href="http://linkedin.com/in/chenminghe" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5 2.5 2.5 0 0 0 4.98 3.5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg></a>
+        <a href="https://space.bilibili.com/38767929" target="_blank" rel="noreferrer" aria-label="Bilibili"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5.5 4.5 3M17 5.5 19.5 3"/><rect x="2.5" y="5.5" width="19" height="13.5" rx="3.5"/><path d="M8.5 10.5v2.5M15.5 10.5v2.5"/></svg></a>
+      </nav>
+      </div>
+    </header>
+
+    <main id="main" class="page-shell blog-shell">
+      <div class="post-topbar">
+        <a class="back-link" href="../blogs.html"><span data-lang="zh" lang="zh-CN">← 全部文章</span><span data-lang="en" lang="en">← All posts</span></a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-set-lang="zh" lang="zh-CN">中文</button>
+          <button type="button" data-set-lang="en" lang="en">EN</button>
+        </div>
+      </div>
+      <article class="post">
+        <header class="post-hero">
+          <figure class="post-cover"><img src="../assets/blog/rhino-ai-modeling-2/cover.webp" alt="" width="1920" height="819"></figure>
+          <div class="post-hero-text">
+            <p class="post-kicker"><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模 · 第 2 篇</span><span data-lang="en" lang="en">Modeling in Rhino with AI · Part 2</span></p>
+            <h1><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（下）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 2)</span></h1>
+            <p class="post-dek"><span data-lang="zh" lang="zh-CN">换 GPT、GLM、DeepSeek 和本地模型再试一遍，效果和问题都在这篇。</span><span data-lang="en" lang="en">Trying it again with GPT, GLM, DeepSeek and a local model: the results and the problems are all here.</span></p>
+            <p class="post-meta"><span data-lang="zh" lang="zh-CN">2026 年 10 月 27 日 · 7 分钟阅读</span><span data-lang="en" lang="en">October 27, 2026 · 12 min read</span></p>
+            
+          </div>
+        </header>
+        <div class="post-layout">
+          <nav class="post-toc" aria-label="Contents"><p class="post-toc-title"><span data-lang="zh" lang="zh-CN">目录</span><span data-lang="en" lang="en">Contents</span></p><ol data-lang="zh" lang="zh-CN"><li><a href="#zh-s1">先用 GPT／Codex 做个旋转楼梯</a></li><li><a href="#zh-s2">换个复杂一点的：朗香教堂</a></li><li><a href="#zh-s3">智谱 GLM：用 ZCode 接上 Rhino</a></li><li><a href="#zh-s4">DeepSeek 怎么接？先装 Harness</a></li><li><a href="#zh-s5">DeepSeek 的水壶和楼梯做得怎么样？</a></li><li><a href="#zh-s6">本地部署：这次没做成</a></li><li><a href="#zh-s7">试下来，我的感觉</a></li></ol><ol data-lang="en" lang="en"><li><a href="#en-s1">Starting with GPT/Codex: a spiral staircase</a></li><li><a href="#en-s2">Something more complex: the Ronchamp chapel</a></li><li><a href="#en-s3">Zhipu GLM: connecting Rhino through ZCode</a></li><li><a href="#en-s4">How do you hook up DeepSeek? Install Harness first</a></li><li><a href="#en-s5">How did DeepSeek do with the kettle and the staircase?</a></li><li><a href="#en-s6">Local deployment: didn&#x27;t work this time</a></li><li><a href="#en-s7">My impressions after trying them all</a></li></ol></nav>
+          <div class="post-main">
+            <div class="post-body" data-lang="zh" lang="zh-CN">
+<p>上篇试了 Claude，这一篇换 GPT／Codex、智谱 GLM 和 DeepSeek，看看同样是在 Rhino 建模，效果有什么区别。最后也试了一下本地部署，把模型放在自己的电脑上跑。结果有好的，也有没做成的，大家可以自行比较。</p>
+<p>第一次接触的朋友，可以先看上篇的安装过程：在 Rhino 安装 <strong>Rhino-MCP-Platform</strong>，用 <strong>MCPConnect</strong> 配置 AI 客户端，再运行 <strong>MCPStart</strong>。连通以后，我们就可以用文字提出要求，让 AI 直接在 Rhino 里建模。</p>
+<aside class="post-note"><p>这里先说明一下，各次尝试的要求和设置并不完全一样，也没有严格控制测试条件。所以这篇主要分享我自己的使用感受，不给它们排一个严格的名次。</p></aside>
+<h2 id="zh-s1"><span class="sec-num">01</span>先用 GPT／Codex 做个旋转楼梯</h2>
+<p>先换到 Codex，这次选的是 <strong>6 Astra</strong>，推理强度是 <strong>Ultra</strong>，还是让它做旋转楼梯。操作和前面用 Claude 差不多：左边看 Rhino，右边给 AI 提要求，模型出来以后再继续修改。</p>
+<p>我当时用的 Prompt：<br>
+<em>连接rhino mcp http://localhost:10500/ 然后建一个旋转楼梯</em></p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l01_codex_stair.webp" alt="Codex 生成的旋转楼梯及执行记录。同一时刻裁切并排，模型已经出现，助手仍在保存。" width="1600" height="662" loading="lazy" decoding="async"><figcaption>Codex 生成的旋转楼梯及执行记录。同一时刻裁切并排，模型已经出现，助手仍在保存。</figcaption></figure>
+<p>这次楼梯下面多了横梁，底部还有螺栓，图层也按材料分开了。这些小地方比我前面用 Claude 做的版本考虑得多一些，速度上我也感觉更快。完成回复显示，这一轮用了 <strong>5 分 50 秒</strong>。</p>
+<h2 id="zh-s2"><span class="sec-num">02</span>换个复杂一点的：朗香教堂</h2>
+<p>楼梯做完，我想试试朗香教堂，因为是个很异形的建筑，用手工建模或者 GH 都不太好建。这次我只要求做<strong>外壳</strong>，先看看它能不能把屋顶、厚墙和塔体这些主要形态做出来。</p>
+<div class="post-prompt"><div class="post-prompt-label">我给它的 Prompt 很简单</div><div class="post-prompt-body"><p>你能建一个朗香教堂的模型给我吗 只要外壳先</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l02_ronchamp.webp" alt="Codex 生成的朗香教堂外壳：屋顶、塔体、厚墙与窗洞已经形成。" width="1600" height="1048" loading="lazy" decoding="async"><figcaption>Codex 生成的朗香教堂外壳：屋顶、塔体、厚墙与窗洞已经形成。</figcaption></figure>
+<p>这个效果我觉得还不错。曲面屋顶、厚墙、塔体和窗洞都出来了，一眼能看出是朗香教堂。至少作为一个可以继续改的外形初稿，我是比较满意的。整体来说，感觉还是很惊艳的。</p>
+<aside class="post-note"><p>扣掉中间额度限制的暂停，第一轮用了 <strong>8 分 13 秒</strong>，恢复后的第二轮用了 <strong>12 分 29 秒</strong>，合计 <strong>20 分 42 秒</strong>，也就是约 <strong>21 分钟</strong>。这里包括生成外壳、后续检查和保存。</p></aside>
+<p>但是转到里面看，就能发现有些彩色玻璃没有嵌进墙里，位置是错的。正面看着不错，换个角度就露馅了。这里做的也只是根据资料建立的近似外壳，尺寸并不是实测复原。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l03_ronchamp_issue.webp" alt="换个角度看局部：部分彩色玻璃与墙体的位置没有对齐，还需要修正。" width="1600" height="633" loading="lazy" decoding="async"><figcaption>换个角度看局部：部分彩色玻璃与墙体的位置没有对齐，还需要修正。</figcaption></figure>
+<h2 id="zh-s3"><span class="sec-num">03</span>智谱 GLM：用 ZCode 接上 Rhino</h2>
+<p>考虑到有些朋友无法使用国外的模型，我也测试了一下国内的模型。智谱 AI 的客户端是 ZCode，和 GPT 之类的类似，你可以通过客户端使用他们的大模型 GLM。我让它调用 Rhino 接口，做了下面这个旋转楼梯。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l04_glm.webp" alt="通过智谱 ZCode 调用 Rhino 接口生成的楼梯，构件与连接关系仍需检查。" width="1220" height="1210" loading="lazy" decoding="async"><figcaption>通过智谱 ZCode 调用 Rhino 接口生成的楼梯，构件与连接关系仍需检查。</figcaption></figure>
+<p>楼梯能做出来，主要构件也有了，但楼梯板是直接悬空的，没有接到中间的柱子上，所以这个结构连接关系还是有些问题。这样看上去，GLM 的思考深度好像不及前两者，这只是单次实验结果，仅作参考。另外，大家还可以考虑其他国内大模型，例如 MiniMax 之类的，工作流都类似，这里就不再赘述了。</p>
+<h2 id="zh-s4"><span class="sec-num">04</span>DeepSeek 怎么接？先装 Harness</h2>
+<p>DeepSeek 是需要单独提出来的。DeepSeek 作为国产模型之光，性能很强，但是梁总不屑做 B 端客户，所以它并没有一个易用的客户端。想要使用 DeepSeek 的 Agent，需要一些操作。我们可以下载安装 <strong>DeepSeek Harness</strong>。</p>
+<p>这里可以粗浅解释一下 Harness 是啥。Agent 客户端背后一般都有这样一套东西：大语言模型负责理解和生成内容，而 Harness 给它配上工具调用、文件访问和执行循环，才能让它从 chatbot 变成可以自己动手干活的 agent。DeepSeek Harness 还比较新，安装没有那么友好，以下是安装流程。</p>
+<p><strong>第一步，把 Harness 装好并启动。</strong><br>
+打开文末的 DeepSeek Harness GitHub 项目，点绿色的 <strong>Code</strong>，复制 HTTPS 地址。我用的是 <strong>GitHub Desktop</strong>：打开 <strong>File → Clone repository → URL</strong>，粘贴地址，选择本地存放位置，再点 <strong>Clone</strong>。这一步也可以直接在终端运行：<br>
+<em>git clone https://github.com/deepseek-ai/deepseek-harness.git</em></p>
+<p>下载好以后，用已有的 AI 客户端打开 <strong>deepseek-harness</strong> 文件夹，让它照着项目说明安装依赖、完成配置。我当时直接说：<br>
+<em>帮我下载所有的依赖项 完成配置并打开web ui</em></p>
+<p>它会检查项目，再安装依赖、启动服务。终端给出本地网址后，用浏览器打开这个地址，就能看到 Web UI。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l10_harness_clone.webp" alt="用 GitHub Desktop 克隆 deepseek-ai/deepseek-harness。" width="900" height="580" loading="lazy" decoding="async"><figcaption>用 GitHub Desktop 克隆 deepseek-ai/deepseek-harness。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l11_ai_install.webp" alt="把项目交给 AI，让它安装依赖、完成配置并打开 Web UI。" width="1400" height="470" loading="lazy" decoding="async"><figcaption>把项目交给 AI，让它安装依赖、完成配置并打开 Web UI。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l05_harness.webp" alt="DeepSeek Harness 的操作界面：先配置模型与工具，再进入 Rhino 建模。" width="1600" height="398" loading="lazy" decoding="async"><figcaption>DeepSeek Harness 的操作界面：先配置模型与工具，再进入 Rhino 建模。</figcaption></figure>
+<p>如果不想克隆源码，官方 README 也提供了一个更简单的启动方法：先安装 Node.js，然后在终端输入下面这行。一般会打开 <strong>127.0.0.1:3080</strong>，如果终端给出的地址不同，就用它给的地址。</p>
+<div class="post-prompt"><div class="post-prompt-label">官方快速启动命令</div><div class="post-prompt-body"><p>npx @deepseek-ai/dsh web</p></div></div>
+<p><strong>第二步，填 API Key，选工作文件夹。</strong><br>
+登录 DeepSeek 开放平台，进入 <strong>API keys</strong>，点 <strong>Create new API key</strong>，填一个名称，再点 <strong>Create API key</strong>，创建后复制密钥。再打开 Harness 的 <strong>Settings → Models</strong>，把密钥填到 DeepSeek 的 API Key 一栏，再点 <strong>Apply</strong> 保存。</p>
+<p>然后点 <strong>Choose workspace</strong>，添加并选中一个项目文件夹，新建会话，选择模型，先看看能不能正常聊天。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l12_api_key_create.webp" alt="点击 API keys → Create new API key，给密钥起名后创建。" width="690" height="380" loading="lazy" decoding="async"><figcaption>点击 API keys → Create new API key，给密钥起名后创建。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l13_harness_models.webp" alt="Settings → Models：填写 API Key，再点 Apply。" width="1420" height="870" loading="lazy" decoding="async"><figcaption>Settings → Models：填写 API Key，再点 Apply。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l14_harness_workspace.webp" alt="左侧是工作文件夹和会话，输入框上方可以切换当前工作文件夹。" width="1600" height="687" loading="lazy" decoding="async"><figcaption>左侧是工作文件夹和会话，输入框上方可以切换当前工作文件夹。</figcaption></figure>
+<p><strong>第三步，连接 Rhino。</strong><br>
+打开 Rhino，用之前类似的流程，在 Harness 的 MCP 入口完成配置，再到 Rhino 运行 MCPStart，就可以开始建模了。</p>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>http://localhost:10500/ 链接rhino mcp 检查连通性</p></div></div>
+<p>一开始还有个小问题：当时选的 Flash 不能读参考图，需要换成带 Vision 的模型。现在模型可能已经更新了，大家可以按自己界面里的选项来选。另外，不同模型收费也不同。</p>
+<h2 id="zh-s5"><span class="sec-num">05</span>DeepSeek 的水壶和楼梯做得怎么样？</h2>
+<p>还是拿玻璃水壶来试。第一版做得有点矮胖，它又自己调整了高宽比例。壶里面还多出来一个不需要的球，后面也自己删掉了。但是壶盖还是太鼓，像戴了一顶帽子，和参考图差得比较明显。</p>
+<p>我当时发了参考图，Prompt 还是这一句：<br>
+<em>Model this image in Rhino</em></p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l06_deepseek_kettle.webp" alt="DeepSeek 修改后的水壶：比例已调整，壶盖依然过于鼓起。" width="770" height="1140" loading="lazy" decoding="async"><figcaption>DeepSeek 修改后的水壶：比例已调整，壶盖依然过于鼓起。</figcaption></figure>
+<aside class="post-note"><p>这一轮的完成回复显示用了 <strong>5 分 44 秒</strong>，约 <strong>350 万 tokens</strong>。确实挺快，从发出要求到它完成建模，大约就是 <strong>6 分钟</strong>，包括它自己检查和修改，不含前面的安装连接。</p></aside>
+<p>另外，我也打开了之前用 DeepSeek 做的旋转楼梯。中心柱、踏步、扶手都有，但是上面直接封住了，大家可以对这个建模能力做个参考。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l07_deepseek_stair.webp" alt="此前用 DeepSeek 生成的旋转楼梯：主体齐全，但通行关系仍有问题。" width="1080" height="1390" loading="lazy" decoding="async"><figcaption>此前用 DeepSeek 生成的旋转楼梯：主体齐全，但通行关系仍有问题。</figcaption></figure>
+<p>费用也看了一下：账单前后从 <strong>2.02 元</strong>变成 <strong>4.10 元</strong>，增加了 <strong>2.08 元</strong>；累计用量增加了 <strong>5,832,303 tokens</strong>，约 <strong>583 万</strong>。这是这一段连接、建模和修改等操作的合计，不是单独一个水壶的费用。</p>
+<p>DeepSeek API 有峰谷价，按目前的规则，周末全天都是谷价，价格是峰价的一半，大家可以比如周末用来建模。这条 API 路线不是订阅制，而是按 token 来收费，命中缓存还可以进一步降低成本，用多少付多少，我觉得还是很好的。具体价格会更新，文末放了官方价目表。并且 Harness 一直在改进，采用 plug-in 架构，也能让社区参与扩展，我觉得这个很 promising。</p>
+<p>总体来说，我只做了一些简单的测试，而且都没有重复测试，所以都比较片面。但根据我的体感来说，当下国产模型的智能水平还是略差一点，不过建模水平用于加速一下平时的工作，应该没有太大问题。我觉得，随着 DeepSeek Harness 以及其他国产模型变得更加强大，之后实现自动、高效的 AI 建模指日可待。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l17_deepseek_usage.webp" alt="上：这段测试前的累计用量；下：测试后的累计用量。两处画面裁切拼排，差额约 583 万 tokens、2.08 元，包含连接检查等调用。" width="1600" height="446" loading="lazy" decoding="async"><figcaption>上：这段测试前的累计用量；下：测试后的累计用量。两处画面裁切拼排，差额约 583 万 tokens、2.08 元，包含连接检查等调用。</figcaption></figure>
+<h2 id="zh-s6"><span class="sec-num">06</span>本地部署：这次没做成</h2>
+<p>最后再试试本地模型。能不能不调用远程服务，就在自己的电脑上跑一个模型来操作 Rhino？这样可以节约很多成本。如果是设计公司，完全可以自己购入服务器，部署本地模型，降低成本且保护公司数据。但是这次我只是在本地跑，我自己的显卡是 5070，12 GB 显存。</p>
+<p>这次我们需要下载 <strong>LM Studio</strong>。进入官网的下载页，找到 <strong>LM Studio</strong>，选择对应系统的安装包，下载后安装。当前页面上还有 Bionic，本文用的是 LM Studio。</p>
+<p>装好后，打开左侧的 <strong>Discover</strong>（Windows 可以按 Ctrl+2），搜索 <strong>Qwen3-Coder-30B-A3B-Instruct</strong>，选中模型和要下载的量化版本，点 <strong>Download</strong>。我这次选的是 <strong>Q4_K_M</strong> 版本，文件约 <strong>17.35 GB</strong>。下载完成后回到聊天页，在顶部选择这个模型并加载。这个部分因为失败了，所以就不详述了，大家感兴趣也可以去看 Rhino MCP 的官方文档。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l15_lm_download.webp" alt="在 LM Studio 官方下载页，选择系统和架构，下载 LM Studio。" width="1540" height="710" loading="lazy" decoding="async"><figcaption>在 LM Studio 官方下载页，选择系统和架构，下载 LM Studio。</figcaption></figure>
+<p>先在 LM Studio 下载并加载模型，确认可以聊天；再加上 Rhino MCP 的连接配置，看看工具列表有没有出来；最后到 Rhino 启动 MCP 服务，让它读一下当前场景。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l16_qwen_select.webp" alt="模型下载好以后，从顶部选择 Qwen3-Coder-30B-A3B-Instruct 并加载。" width="1350" height="360" loading="lazy" decoding="async"><figcaption>模型下载好以后，从顶部选择 Qwen3-Coder-30B-A3B-Instruct 并加载。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l08_local_setup.webp" alt="LM Studio 中实际使用的 Qwen3-Coder-30B-A3B-Instruct 模型与设置。" width="1320" height="1680" loading="lazy" decoding="async"><figcaption>LM Studio 中实际使用的 Qwen3-Coder-30B-A3B-Instruct 模型与设置。</figcaption></figure>
+<p>这次要求已经降得很低了：读取场景，画一个球。后面也试了让它打开 Grasshopper，先看看最简单的操作能不能做。</p>
+<p>结果还是不顺利。工具列表是有了，但一调用就反复出现 <strong>Unknown command</strong>，还有 <strong>Model failed to generate a tool call</strong>。我调整过启用的工具，也等了挺久。Grasshopper 倒是打开了，但想要的简单建模任务始终没有可靠完成。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l09_local_failure.webp" alt="同一时刻的两处画面裁切并排：左侧工具调用失败，右侧 Rhino 仍是空白视图。" width="1600" height="733" loading="lazy" decoding="async"><figcaption>同一时刻的两处画面裁切并排：左侧工具调用失败，右侧 Rhino 仍是空白视图。</figcaption></figure>
+<aside class="post-note"><p>所以这次本地部署只能说：模型加载成功了，Rhino 建模没成功。连上以后能列出工具，和模型真的会用这些工具，还是有差别。</p></aside>
+<h2 id="zh-s7"><span class="sec-num">07</span>试下来，我的感觉</h2>
+<div class="post-card"><p><strong>Claude／Claude Code</strong></p>
+<p>水壶主体还可以，牛来改了好几轮也没太满意。楼梯和 GH 能做，不过等待、修改和整理画布都花较长时间。Claude 的编程还是更加强大，更适合 GH 和脚本任务。</p></div>
+<div class="post-card"><p><strong>GPT／Codex</strong></p>
+<p>楼梯多做了一些构件细节，朗香教堂的外壳也让我比较满意。但楼梯连接和彩色玻璃的位置还是有错。整体来说，Codex 的 3D 建模水平还是最顶。</p></div>
+<div class="post-card"><p><strong>GLM／ZCode</strong></p>
+<p>能建出可用的模型，中规中矩。</p></div>
+<div class="post-card"><p><strong>DeepSeek／Harness</strong></p>
+<p>建模能力尚可，API 计费合理，期待 Harness 之后有更多进展。</p></div>
+<div class="post-card"><p><strong>本地 Qwen／LM Studio</strong></p>
+<p>能加载，也能看到工具列表，但实际调用一直出问题。本地部署可能需要更好的硬件，例如 RTX Spark 笔记本、DGX Spark 这类设备，或者小型服务器、工作站，也可能需要更好的小参数模型。</p></div>
+<h3>官方资料</h3>
+<ul>
+<li><a href="https://github.com/mcneel/RhinoAI" target="_blank" rel="noopener">Rhino MCP 官方项目与连接文档</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness 项目与启动说明</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md" target="_blank" rel="noopener">DeepSeek Harness Web UI 使用指南</a></li>
+<li><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">DeepSeek 开放平台与 API Key</a></li>
+<li><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">DeepSeek 模型与价格（含峰谷价）</a></li>
+<li><a href="https://lmstudio.ai/download" target="_blank" rel="noopener">LM Studio 官方下载</a></li>
+<li><a href="https://lmstudio.ai/docs/app/basics/download-model" target="_blank" rel="noopener">LM Studio 模型下载说明</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/rtx-spark/" target="_blank" rel="noopener">NVIDIA RTX Spark</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener">NVIDIA DGX Spark</a></li>
+</ul>
+            </div>
+            <div class="post-body" data-lang="en" lang="en">
+<p>In Part 1 I tried Claude. This time I'm switching to GPT/Codex, Zhipu GLM and DeepSeek to see how they differ when doing the same thing: modeling in Rhino. At the end I also tried a local deployment, running the model on my own computer. Some things worked and some didn't, so you can compare for yourself.</p>
+<p>If this is your first time here, you can start with the installation steps in Part 1: install <strong>Rhino-MCP-Platform</strong> in Rhino, configure your AI client with <strong>MCPConnect</strong>, then run <strong>MCPStart</strong>. Once it's connected, we can describe what we want in text and have the AI build the model directly in Rhino.</p>
+<aside class="post-note"><p>A quick note first: the requirements and settings weren't exactly the same across these attempts, and I didn't strictly control the test conditions. So this post is mainly about my own experience using them. I'm not giving them a strict ranking.</p></aside>
+<h2 id="en-s1"><span class="sec-num">01</span>Starting with GPT/Codex: a spiral staircase</h2>
+<p>First I switched to Codex. This time I picked <strong>6 Astra</strong> with reasoning effort set to <strong>Ultra</strong>, and again asked it to make a spiral staircase. The workflow is about the same as when I used Claude before: Rhino on the left, prompts to the AI on the right, and once the model appears you keep revising it.</p>
+<p>The prompt I used at the time:<br>
+<em>connect to rhino mcp http://localhost:10500/ then build a spiral staircase</em></p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l01_codex_stair.webp" alt="The spiral staircase generated by Codex and its execution log. Two crops from the same moment, side by side: the model has already appeared while the assistant is still saving." width="1600" height="662" loading="lazy" decoding="async"><figcaption>The spiral staircase generated by Codex and its execution log. Two crops from the same moment, side by side: the model has already appeared while the assistant is still saving.</figcaption></figure>
+<p>This time there are extra beams under the stairs, bolts at the bottom, and the layers are split by material. It put more thought into these small details than the version I made with Claude earlier, and it also felt faster to me. The completion reply shows this round took <strong>5 min 50 s</strong>.</p>
+<h2 id="en-s2"><span class="sec-num">02</span>Something more complex: the Ronchamp chapel</h2>
+<p>With the staircase done, I wanted to try the Ronchamp chapel, because it's a very free-form building that's hard to model either by hand or with Grasshopper (GH). This time I only asked for the <strong>exterior shell</strong>, to see first whether it could produce the main forms: the roof, the thick walls and the towers.</p>
+<div class="post-prompt"><div class="post-prompt-label">My prompt to it was very simple</div><div class="post-prompt-body"><p>can you build me a model of the Ronchamp chapel just the shell for now</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l02_ronchamp.webp" alt="The Ronchamp chapel shell generated by Codex: the roof, towers, thick walls and window openings have all taken shape." width="1600" height="1048" loading="lazy" decoding="async"><figcaption>The Ronchamp chapel shell generated by Codex: the roof, towers, thick walls and window openings have all taken shape.</figcaption></figure>
+<p>I think this turned out pretty well. The curved roof, thick walls, towers and window openings are all there, and you can tell at a glance it's Ronchamp. At least as a first draft of the form that I can keep working on, I'm fairly happy with it. Overall, it was honestly quite impressive.</p>
+<aside class="post-note"><p>Not counting the pause in the middle when I hit the usage limit, the first round took <strong>8 min 13 s</strong> and the second round after resuming took <strong>12 min 29 s</strong>, for a total of <strong>20 min 42 s</strong>, or about <strong>21 minutes</strong>. This includes generating the shell, the follow-up checks and saving.</p></aside>
+<p>But once you move the view inside, you can see that some of the stained glass isn't set into the walls and is in the wrong position. It looks good from the front, but from another angle the flaws show. Also, what it built is only an approximate shell based on reference material. The dimensions aren't reconstructed from actual measurements.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l03_ronchamp_issue.webp" alt="A closer look from another angle: some of the stained glass isn't aligned with the walls and still needs fixing." width="1600" height="633" loading="lazy" decoding="async"><figcaption>A closer look from another angle: some of the stained glass isn't aligned with the walls and still needs fixing.</figcaption></figure>
+<h2 id="en-s3"><span class="sec-num">03</span>Zhipu GLM: connecting Rhino through ZCode</h2>
+<p>Since some readers can't access non-Chinese models, I also tested a Chinese model. Zhipu AI's client is ZCode. As with GPT and similar tools, you use their large model, GLM, through the client. I had it call the Rhino interface and make the spiral staircase below.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l04_glm.webp" alt="A staircase generated by calling the Rhino interface through Zhipu ZCode. The members and how they connect still need checking." width="1220" height="1210" loading="lazy" decoding="async"><figcaption>A staircase generated by calling the Rhino interface through Zhipu ZCode. The members and how they connect still need checking.</figcaption></figure>
+<p>It could make the staircase, and the main members are there, but the stair treads are just floating in midair and don't connect to the central column, so the structural connections still have some problems. Judging from this, GLM's depth of reasoning seems to fall short of the previous two, but this is only a single test result, so treat it as just a rough reference. You can also consider other Chinese models, such as MiniMax. The workflow is similar, so I won't go into it here.</p>
+<h2 id="en-s4"><span class="sec-num">04</span>How do you hook up DeepSeek? Install Harness first</h2>
+<p>DeepSeek needs its own section. DeepSeek, the pride of Chinese AI models, is very capable, but Liang, DeepSeek's boss, can't be bothered with business (B2B) customers, so it doesn't have an easy-to-use client. Getting DeepSeek to work as an agent takes a bit of work. We can download and install <strong>DeepSeek Harness</strong>.</p>
+<p>Let me roughly explain what a harness is. Behind an agent client there's usually a setup like this: the large language model handles understanding and generating content, and the harness equips it with tool calling, file access and an execution loop. That's what turns it from a chatbot into an agent that can actually do the work itself. DeepSeek Harness is still fairly new and the installation isn't very user-friendly, so here's the installation process.</p>
+<p><strong>Step 1: install and launch Harness.</strong><br>
+Open the DeepSeek Harness GitHub project linked at the end of this post, click the green <strong>Code</strong> button and copy the HTTPS address. I used <strong>GitHub Desktop</strong>: open <strong>File → Clone repository → URL</strong>, paste the address, choose where to store it locally, then click <strong>Clone</strong>. You can also do this step directly in the terminal:<br>
+<em>git clone https://github.com/deepseek-ai/deepseek-harness.git</em></p>
+<p>Once it's downloaded, open the <strong>deepseek-harness</strong> folder with an AI client you already have, and have it install the dependencies and finish the configuration following the project instructions. At the time I just said:<br>
+<em>download all the dependencies for me, finish the config and open the web ui</em></p>
+<p>It will check the project, then install the dependencies and start the service. Once the terminal gives you a local address, open it in your browser and you'll see the Web UI.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l10_harness_clone.webp" alt="Cloning deepseek-ai/deepseek-harness with GitHub Desktop." width="900" height="580" loading="lazy" decoding="async"><figcaption>Cloning deepseek-ai/deepseek-harness with GitHub Desktop.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l11_ai_install.webp" alt="Handing the project to the AI to install the dependencies, finish the configuration and open the Web UI." width="1400" height="470" loading="lazy" decoding="async"><figcaption>Handing the project to the AI to install the dependencies, finish the configuration and open the Web UI.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l05_harness.webp" alt="The DeepSeek Harness interface: configure the models and tools first, then move on to modeling in Rhino." width="1600" height="398" loading="lazy" decoding="async"><figcaption>The DeepSeek Harness interface: configure the models and tools first, then move on to modeling in Rhino.</figcaption></figure>
+<p>If you don't want to clone the source, the official README also gives a simpler way to launch it: install Node.js first, then type the line below in the terminal. It usually opens <strong>127.0.0.1:3080</strong>. If the terminal gives a different address, use that one.</p>
+<div class="post-prompt"><div class="post-prompt-label">Official quick-start command</div><div class="post-prompt-body"><p>npx @deepseek-ai/dsh web</p></div></div>
+<p><strong>Step 2: fill in the API key and choose a working folder.</strong><br>
+Log in to the DeepSeek Open Platform, go to <strong>API keys</strong>, click <strong>Create new API key</strong>, enter a name, then click <strong>Create API key</strong>, and copy the key once it's created. Then open <strong>Settings → Models</strong> in Harness, paste the key into the API Key field for DeepSeek, and click <strong>Apply</strong> to save.</p>
+<p>Then click <strong>Choose workspace</strong>, add and select a project folder, start a new session, pick a model, and check first that you can chat with it normally.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l12_api_key_create.webp" alt="Click API keys → Create new API key, give the key a name and create it." width="690" height="380" loading="lazy" decoding="async"><figcaption>Click API keys → Create new API key, give the key a name and create it.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l13_harness_models.webp" alt="Settings → Models: fill in the API Key, then click Apply." width="1420" height="870" loading="lazy" decoding="async"><figcaption>Settings → Models: fill in the API Key, then click Apply.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l14_harness_workspace.webp" alt="The working folders and sessions are on the left. You can switch the current working folder above the input box." width="1600" height="687" loading="lazy" decoding="async"><figcaption>The working folders and sessions are on the left. You can switch the current working folder above the input box.</figcaption></figure>
+<p><strong>Step 3: connect Rhino.</strong><br>
+Open Rhino and, following a process similar to before, finish the setup in Harness's MCP section. Then run MCPStart in Rhino, and you can start modeling.</p>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>http://localhost:10500/ connect rhino mcp check connectivity</p></div></div>
+<p>There was a small problem at the start: the Flash model I had selected couldn't read reference images, so I had to switch to a model with Vision. The models may have been updated by now, so just choose from the options in your own interface. Also, different models are priced differently.</p>
+<h2 id="en-s5"><span class="sec-num">05</span>How did DeepSeek do with the kettle and the staircase?</h2>
+<p>Again I tested it with the glass kettle. The first version came out a bit short and squat, and it adjusted the height-to-width ratio on its own. There was also an unneeded sphere inside the kettle, which it later deleted by itself too. But the lid is still too domed, like it's wearing a hat, and it's clearly different from the reference image.</p>
+<p>I sent the reference image, and the prompt was still this one line:<br>
+<em>Model this image in Rhino</em></p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l06_deepseek_kettle.webp" alt="DeepSeek's revised kettle: the proportions are adjusted, but the lid is still too domed." width="770" height="1140" loading="lazy" decoding="async"><figcaption>DeepSeek's revised kettle: the proportions are adjusted, but the lid is still too domed.</figcaption></figure>
+<aside class="post-note"><p>The completion reply for this round shows <strong>5 min 44 s</strong> and about <strong>3.5 million tokens</strong>. It really is fast. It took about <strong>6 minutes</strong> from sending the request to finishing the model, including its own checking and revisions, not counting the installation and connection beforehand.</p></aside>
+<p>I also opened the spiral staircase I made earlier with DeepSeek. The central column, treads and handrail are all there, but the top is just sealed off. You can use this as a reference for its modeling ability.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l07_deepseek_stair.webp" alt="The spiral staircase generated earlier with DeepSeek: the main parts are all there, but the circulation still has problems." width="1080" height="1390" loading="lazy" decoding="async"><figcaption>The spiral staircase generated earlier with DeepSeek: the main parts are all there, but the circulation still has problems.</figcaption></figure>
+<p>I also checked the cost: the bill went from <strong>2.02 yuan</strong> to <strong>4.10 yuan</strong>, an increase of <strong>2.08 yuan</strong>. Cumulative usage went up by <strong>5,832,303 tokens</strong>, about <strong>5.83 million</strong>. This is the total for this whole stretch of connecting, modeling, revising and so on, not the cost of the kettle alone.</p>
+<p>DeepSeek's API has peak and off-peak pricing. Under the current rules, weekends are off-peak all day, at half the peak price, so you could, for example, do your modeling on weekends. This API route isn't a subscription. It's billed per token, and cache hits can lower the cost further. You pay for what you use, which I think is pretty good. Prices change from time to time, so I've put the official price list at the end. Also, Harness keeps improving, and its plug-in architecture lets the community help extend it, which I find very promising.</p>
+<p>Overall, I only did a few simple tests, and none of them were repeated, so the results are pretty limited. But going by my gut feeling, Chinese models are still a little behind in intelligence right now. That said, their modeling ability should be fine for speeding up everyday work. I think as DeepSeek Harness and other Chinese models get stronger, automatic, efficient AI modeling is just around the corner.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l17_deepseek_usage.webp" alt="Top: cumulative usage before this round of testing. Bottom: cumulative usage after. Two screenshots cropped and stacked. The difference is about 5.83 million tokens and 2.08 yuan, including calls such as connection checks." width="1600" height="446" loading="lazy" decoding="async"><figcaption>Top: cumulative usage before this round of testing. Bottom: cumulative usage after. Two screenshots cropped and stacked. The difference is about 5.83 million tokens and 2.08 yuan, including calls such as connection checks.</figcaption></figure>
+<h2 id="en-s6"><span class="sec-num">06</span>Local deployment: didn't work this time</h2>
+<p>Finally, I tried a local model. Can we skip remote services and run a model on our own computer to operate Rhino? That would save a lot of money. A design firm could buy its own server and deploy a local model, cutting costs and protecting company data. But this time I only ran it locally on my own machine. My graphics card is a 5070 with 12 GB of VRAM.</p>
+<p>For this we need to download <strong>LM Studio</strong>. Go to the download page on the official site, find <strong>LM Studio</strong>, pick the installer for your system, download and install it. The page currently also lists Bionic. This post uses LM Studio.</p>
+<p>Once it's installed, open <strong>Discover</strong> on the left (on Windows you can press Ctrl+2), search for <strong>Qwen3-Coder-30B-A3B-Instruct</strong>, select the model and the quantized version you want, and click <strong>Download</strong>. This time I picked the <strong>Q4_K_M</strong> version, a file of about <strong>17.35 GB</strong>. When the download finishes, go back to the chat page, select this model at the top and load it. Since this part failed, I won't go into detail. If you're interested, you can check the official Rhino MCP documentation.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l15_lm_download.webp" alt="On the official LM Studio download page, choose your system and architecture, then download LM Studio." width="1540" height="710" loading="lazy" decoding="async"><figcaption>On the official LM Studio download page, choose your system and architecture, then download LM Studio.</figcaption></figure>
+<p>First download and load the model in LM Studio and confirm you can chat with it. Then add the Rhino MCP connection config and see whether the tool list shows up. Finally, start the MCP service in Rhino and have it read the current scene.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l16_qwen_select.webp" alt="Once the model is downloaded, select Qwen3-Coder-30B-A3B-Instruct at the top and load it." width="1350" height="360" loading="lazy" decoding="async"><figcaption>Once the model is downloaded, select Qwen3-Coder-30B-A3B-Instruct at the top and load it.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l08_local_setup.webp" alt="The Qwen3-Coder-30B-A3B-Instruct model and settings I actually used in LM Studio." width="1320" height="1680" loading="lazy" decoding="async"><figcaption>The Qwen3-Coder-30B-A3B-Instruct model and settings I actually used in LM Studio.</figcaption></figure>
+<p>This time I'd already lowered the bar a lot: read the scene and draw a sphere. Later I also tried having it open Grasshopper, just to see whether the simplest operations would work.</p>
+<p>It still didn't go smoothly. The tool list was there, but as soon as it called a tool I kept getting <strong>Unknown command</strong>, as well as <strong>Model failed to generate a tool call</strong>. I adjusted which tools were enabled and waited quite a while. Grasshopper did open, but the simple modeling task I wanted was never reliably completed.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-2/l09_local_failure.webp" alt="Two screenshots from the same moment, cropped side by side: tool calls failing on the left, and Rhino still showing an empty view on the right." width="1600" height="733" loading="lazy" decoding="async"><figcaption>Two screenshots from the same moment, cropped side by side: tool calls failing on the left, and Rhino still showing an empty view on the right.</figcaption></figure>
+<aside class="post-note"><p>So all I can say about local deployment this time is: the model loaded, but the Rhino modeling didn't work. Being able to list the tools once connected is still different from the model actually knowing how to use them.</p></aside>
+<h2 id="en-s7"><span class="sec-num">07</span>My impressions after trying them all</h2>
+<div class="post-card"><p><strong>Claude/Claude Code</strong></p>
+<p>The kettle body was okay, but <em>Niu Lai</em> (《牛来》) took several rounds of changes and I still wasn't very happy with it. It can do the staircase and GH, but waiting, revising and tidying up the canvas all took quite a long time. Claude is still stronger at programming and better suited to GH and scripting tasks.</p></div>
+<div class="post-card"><p><strong>GPT/Codex</strong></p>
+<p>It added more detail to the staircase members, and I was fairly happy with the Ronchamp chapel shell too. But the staircase connections and the stained-glass positions still had errors. Overall, Codex's 3D modeling is still the best of the bunch.</p></div>
+<div class="post-card"><p><strong>GLM/ZCode</strong></p>
+<p>It can build usable models. Middle of the road.</p></div>
+<div class="post-card"><p><strong>DeepSeek/Harness</strong></p>
+<p>Decent modeling ability and reasonable API pricing. I'm looking forward to more progress from Harness.</p></div>
+<div class="post-card"><p><strong>Local Qwen/LM Studio</strong></p>
+<p>It loads, and you can see the tool list, but actual tool calls kept failing. Local deployment may need better hardware, such as an RTX Spark laptop, DGX Spark or similar devices, or a small server or workstation. It may also need a better small-parameter model.</p></div>
+<h3>Official resources</h3>
+<ul>
+<li><a href="https://github.com/mcneel/RhinoAI" target="_blank" rel="noopener">Rhino MCP official project and connection docs</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener">DeepSeek Harness project and launch instructions</a></li>
+<li><a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/user/guide/index.md" target="_blank" rel="noopener">DeepSeek Harness Web UI user guide</a></li>
+<li><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">DeepSeek Open Platform and API keys</a></li>
+<li><a href="https://api-docs.deepseek.com/zh-cn/quick_start/pricing/" target="_blank" rel="noopener">DeepSeek models and pricing (including peak/off-peak rates)</a></li>
+<li><a href="https://lmstudio.ai/download" target="_blank" rel="noopener">LM Studio official download</a></li>
+<li><a href="https://lmstudio.ai/docs/app/basics/download-model" target="_blank" rel="noopener">LM Studio model download guide</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/rtx-spark/" target="_blank" rel="noopener">NVIDIA RTX Spark</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener">NVIDIA DGX Spark</a></li>
+</ul>
+            </div>
+            <nav class="post-series" aria-label="Series"><a class="post-series-prev" href="rhino-ai-modeling-1.html"><small><span data-lang="zh" lang="zh-CN">上一篇</span><span data-lang="en" lang="en">Previous</span></small><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（上）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 1)</span></a></nav>
+          </div>
+        </div>
+      </article>
+    </main>
+    <script src="../assets/js/blog.js"></script>
+  </body>
+</html>

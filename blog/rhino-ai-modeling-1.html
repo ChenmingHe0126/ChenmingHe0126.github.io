@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用AI在Rhino里建模（上） · Modeling in Rhino with AI (Part 1) - Chenming He</title>
+    <meta name="description" content="Installing Rhino MCP and letting AI model a kettle, the cow and a spiral staircase, then trying Grasshopper.">
+    <link rel="stylesheet" href="../assets/css/site.css">
+    <link rel="stylesheet" href="../assets/css/blog.css">
+    <link rel="canonical" href="https://chenminghe0126.github.io/blog/rhino-ai-modeling-1.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Modeling in Rhino with AI (Part 1) | 用AI在Rhino里建模（上）">
+    <meta property="og:description" content="Installing Rhino MCP and letting AI model a kettle, the cow and a spiral staircase, then trying Grasshopper.">
+    <meta property="og:image" content="https://chenminghe0126.github.io/assets/blog/rhino-ai-modeling-1/cover.jpg">
+    <meta property="og:url" content="https://chenminghe0126.github.io/blog/rhino-ai-modeling-1.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <script>
+(function () {
+  var q = new URLSearchParams(location.search).get("lang"), s = null;
+  try { s = localStorage.getItem("blog-lang"); } catch (e) {}
+  var l = q === "zh" || q === "en" ? q : s === "zh" || s === "en" ? s : (navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
+  document.documentElement.setAttribute("data-lang", l);
+  document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
+})();
+</script>
+  </head>
+  <body data-page="blogs" data-title-zh="用AI在Rhino里建模（上） - Chenming He" data-title-en="Modeling in Rhino with AI (Part 1) - Chenming He">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="site-header-inner">
+      <a class="site-title" href="../index.html">Chenming He</a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../demos.html">Demos</a>
+        <a href="../blogs.html" aria-current="page">Blogs</a>
+        <a href="../publications.html">Publications</a>
+        <a href="../cv.html">CV</a>
+        <a href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noreferrer">DeadFish</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <nav class="social-nav" aria-label="Social links">
+        <a href="https://instagram.com/chenming_he?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.youtube.com/@chenminghe8218/featured" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></a>
+        <a href="http://linkedin.com/in/chenminghe" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5 2.5 2.5 0 0 0 4.98 3.5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9z"/></svg></a>
+        <a href="https://space.bilibili.com/38767929" target="_blank" rel="noreferrer" aria-label="Bilibili"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5.5 4.5 3M17 5.5 19.5 3"/><rect x="2.5" y="5.5" width="19" height="13.5" rx="3.5"/><path d="M8.5 10.5v2.5M15.5 10.5v2.5"/></svg></a>
+      </nav>
+      </div>
+    </header>
+
+    <main id="main" class="page-shell blog-shell">
+      <div class="post-topbar">
+        <a class="back-link" href="../blogs.html"><span data-lang="zh" lang="zh-CN">← 全部文章</span><span data-lang="en" lang="en">← All posts</span></a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-set-lang="zh" lang="zh-CN">中文</button>
+          <button type="button" data-set-lang="en" lang="en">EN</button>
+        </div>
+      </div>
+      <article class="post">
+        <header class="post-hero">
+          <figure class="post-cover"><img src="../assets/blog/rhino-ai-modeling-1/cover.webp" alt="" width="1921" height="819"></figure>
+          <div class="post-hero-text">
+            <p class="post-kicker"><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模 · 第 1 篇</span><span data-lang="en" lang="en">Modeling in Rhino with AI · Part 1</span></p>
+            <h1><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（上）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 1)</span></h1>
+            <p class="post-dek"><span data-lang="zh" lang="zh-CN">安装 Rhino MCP，让 AI 建水壶、牛牛和旋转楼梯，再试试 Grasshopper。</span><span data-lang="en" lang="en">Installing Rhino MCP and letting AI model a kettle, the cow and a spiral staircase, then trying Grasshopper.</span></p>
+            <p class="post-meta"><span data-lang="zh" lang="zh-CN">2026 年 10 月 27 日 · 7 分钟阅读</span><span data-lang="en" lang="en">October 27, 2026 · 11 min read</span></p>
+            
+          </div>
+        </header>
+        <div class="post-layout">
+          <nav class="post-toc" aria-label="Contents"><p class="post-toc-title"><span data-lang="zh" lang="zh-CN">目录</span><span data-lang="en" lang="en">Contents</span></p><ol data-lang="zh" lang="zh-CN"><li><a href="#zh-s1">先说一下 MCP 是干什么的</a></li><li><a href="#zh-s2">安装和连接</a></li><li><a href="#zh-s3">第一个例子：照着照片建水壶</a></li><li><a href="#zh-s4">牛来：折腾了半天，效果一般</a></li><li><a href="#zh-s5">再试一个旋转楼梯</a></li><li><a href="#zh-s6">接着试 Grasshopper，第一版很乱</a></li><li><a href="#zh-s7">让它在 GH 里写个生命游戏</a></li><li><a href="#zh-s8">下篇再换几种 AI 试试</a></li></ol><ol data-lang="en" lang="en"><li><a href="#en-s1">First, what MCP does</a></li><li><a href="#en-s2">Installation and connection</a></li><li><a href="#en-s3">First example: modeling a kettle from a photo</a></li><li><a href="#en-s4">Niu Lai: a lot of fiddling, mediocre results</a></li><li><a href="#en-s5">Next, a spiral staircase</a></li><li><a href="#en-s6">Then Grasshopper: the first version was a mess</a></li><li><a href="#en-s7">Having it write a Game of Life in GH</a></li><li><a href="#en-s8">In Part 2: trying a few other AIs</a></li></ol></nav>
+          <div class="post-main">
+            <div class="post-body" data-lang="zh" lang="zh-CN">
+<p>Hello，朋友们！时过境迁，上次更新还是6年前。创建公众号之初，我在读本科，现在已经快博士毕业了。中途其实也做了一些知识分享，不过觉得视频的方式更加直观，所以在小破站上更新了一系列在 Rhino 里使用 C# 的视频。现在准备捡起公众号，继续写更多 blogs，但主要内容会从 GH 转向 coding + AI 方面的知识分享。</p>
+<p>这里的文章，也主要会是我之后每期视频的精炼图文版本。我将借助 AI 的无上大法快速写文，所以有的部分难免带点 AI 的僵硬文气，不过为了快速传播知识，我觉得也未尝不可。</p>
+<p>不多废话，这次主要想分享如何安装 Rhino MCP，让 AI Agent 帮我们在 Rhino 里建模。先讲怎么装，再用几个例子看看效果。我试了几个例子：照着照片建水壶、做《牛来》里的牛牛、生成旋转楼梯，用 Grasshopper 把楼梯做成可以调参数的模型。国内国外的 AI 都试了一下，包括 Claude Code、Codex、GLM 和 DeepSeek，最后还折腾了一下本地模型（不是很成功，本地部署还道阻且长）。大家可以自己比较一下效果。</p>
+<p>内容比较多，分成上下两篇。上篇先讲安装和 Claude 的几个例子，下篇再看其他 AI。已经装好的朋友，可以直接跳到第三节看水壶。</p>
+<h2 id="zh-s1"><span class="sec-num">01</span>先说一下 MCP 是干什么的</h2>
+<p>MCP 全称 Model Context Protocol，模型上下文协议。它其实是一套通信规则，让 AI Agent 可以和其他程序交流，从而控制其他程序做事。这套 Rhino 工作流会在本地启动一个服务（Server），通过本机地址，用类似访问网站的方式相互通信。如果你的 Rhino 是设置了防火墙进行的破解，使用这个功能就可能受限。AI Agent 和 Rhino 通过 MCP 这个桥梁连接后，Agent 可以直接调用 Rhino 的工具，读取当前模型、运行建模操作，还能切换视角、截图，再根据结果继续修改。我们在聊天窗口里提要求，模型就在 Rhino 里自动生成，省去大家的建模之苦了。</p>
+<aside class="post-note"><p>这里有三个东西容易混：基础大语言<strong>模型</strong>负责理解要求，AI <strong>客户端</strong>是我们发出指令、调用工具的地方，<strong>Rhino</strong> 用来建模。MCP 就是把它们接起来的桥梁。</p></aside>
+<p>先准备好 <strong>Rhino 8</strong>。这里先用 <strong>Claude Code</strong> 中的 Fable 5／5.1 做演示，部分任务还开了 Ultracode 多智能体功能，也就是让几个 AI 分工处理。下面的耗时都是在这套设置下试出来的。</p>
+<h2 id="zh-s2"><span class="sec-num">02</span>安装和连接</h2>
+<p><strong>第一步，安装 Rhino 插件。</strong><br>
+在 Rhino 命令行输入 <strong>PackageManager</strong>，搜索 Rhino-MCP，找到 <strong>Rhino-MCP-Platform</strong>。这里注意一下，搜索结果里有名字很像的插件，要认准说明中的 <strong>made by McNeel</strong>。点击 Install，装好后重启 Rhino。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u01_package.webp" alt="认准 Rhino-MCP-Platform 与 made by McNeel。" width="765" height="380" loading="lazy" decoding="async"><figcaption>认准 Rhino-MCP-Platform，说明里有 made by McNeel。</figcaption></figure>
+<p><strong>第二步，连接 AI 客户端。</strong><br>
+在 Rhino 命令行里输入 <strong>MCPConnect</strong>，窗口会列出检测到的客户端，点击对应的 Install 就可以配置。下面这张图里，Claude Code 已经显示 Installed，说明装好了；Codex 还没有装。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u02_connect.webp" alt="MCPConnect：给已经安装好的客户端配置连接。" width="1150" height="560" loading="lazy" decoding="async"><figcaption>MCPConnect 窗口，Claude Code 已经显示 Installed。</figcaption></figure>
+<p>如果你的界面和这里不一样，没有 Install 页面，可以切到 Prompt，复制它生成的配置提示，发给要用的 AI 客户端，让它按提示配置，再重启客户端。版本更新后入口可能会变，文末放了官方说明。</p>
+<p><strong>第三步，启动服务，试一下能不能连上。</strong><br>
+回到 Rhino，在命令行输入 <strong>MCPStart</strong>，上方的日志（Log）里会显示 MCP Server 启动在哪个本地端口。把连接信息发给 AI，让它检查一下：</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u12_server_log.webp" alt="运行 MCPStart 后，命令区显示服务地址：http://localhost:10500/。" width="713" height="120" loading="lazy" decoding="async"><figcaption>运行 MCPStart 后，命令区显示服务地址：http://localhost:10500/。</figcaption></figure>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>MCP server currently running on http://localhost:10500/ 请帮我连接rhino mcp 并检查连接性</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u03_connected.webp" alt="连接测试成功后，再用实际操作确认工具是否可用。" width="1330" height="405" loading="lazy" decoding="async"><figcaption>连接检查通过后，再让它做一个小模型试试。</figcaption></figure>
+<p>连上之后，可以先让它做一个小东西来测试一下。另外，可以输入 <strong>MCPHelp</strong> 打开官方文档，查阅说明和更新（可能需要爬墙）。</p>
+<h2 id="zh-s3"><span class="sec-num">03</span>第一个例子：照着照片建水壶</h2>
+<p>先试一个水壶。我把 McNeel 官方示例里的玻璃电热水壶照片发给 Claude Code，要求就一句话：</p>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>Model this image in Rhino</p></div></div>
+<p>我们看一下实际操作时的样子。左边开着 Rhino，右边是 Claude 的聊天和任务窗口。右边能看到它在分析什么、准备怎么建，左边能看到模型逐步生成。不需要把代码复制来复制去，建模操作由它自己调用。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u04_kettle_workflow.webp" alt="同一时刻的工作界面：左侧 Rhino 显示水壶，右侧 Claude 展示建模任务与脚本流程。" width="1920" height="927" loading="lazy" decoding="async"><figcaption>同一时刻的界面，左边是 Rhino，右边是 Claude 的任务窗口。</figcaption></figure>
+<p>这一轮开了多智能体功能。它先看参考图，把水壶拆成壶身、底座、顶部、手柄等部分，再分别写 Rhino Python 脚本，运行之后生成几何体，最后换几个角度截图检查。等它运行的时候，也可以看看任务列表，有没有一开始就理解错的地方。</p>
+<aside class="post-note"><p>从发出要求，到开始查看完整的水壶主体，等了大约 <strong>8–9 分钟</strong>。加上后面换视角、调显示和检查结果，前后一共约 <strong>14 分钟</strong>。这里算的是我这一轮操作的时间，包括等待和检查。</p></aside>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u05_kettle_result.webp" alt="左：这次生成的水壶；右：参考照片。两处画面裁切并排，便于比较手柄与比例。" width="1108" height="560" loading="lazy" decoding="async"><figcaption>左边是生成结果，右边是参考图。两处画面裁切并排，方便对比。</figcaption></figure>
+<p>远看还可以，玻璃壶身、黑色手柄和底座都做出来了。但对着原图细看，手柄上下的宽度不对，按钮和一些局部比例也有偏差。不过完全解放双手的建模还是很快乐的。</p>
+<p>朋友们可以试着继续改，只需把需求和问题描述清楚。如果只说一句“不像”，它也很难知道我们想改哪儿。模型已经分了图层，如果有些地方自己动手更快，也可以接着改。</p>
+<h2 id="zh-s4"><span class="sec-num">04</span>牛来：折腾了半天，效果一般</h2>
+<p>水壶做完，我想整个活，就再试一个没那么规整的。正好当时《牛来》很火，我给了里面牛牛的参考图，让它照着建模。第一版出来，头、角和身体是都有了，但基本是球体、圆柱这些基础几何拼起来的。对着参考图看一下，造型还是差得挺远。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u06_cow_first.webp" alt="左：牛来角色初稿；右：参考形象。同一时刻的两处画面裁切并排，初稿仍明显像基础几何体的组合。" width="794" height="565" loading="lazy" decoding="async"><figcaption>左边是第一版，右边是参考形象。同一时刻的两处画面裁切并排。</figcaption></figure>
+<p>我接着让它用 SubD，想着把形状做得柔软一些。后面又改了好几轮，头、口鼻、眼睛、眉毛、手臂、肚子都动过。比最开始是有进步，但看起来还是差点火候，角色的神态也没做对。这说明模型的水平还是有限，也许 Codex 会表现更好。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u06b_cow_later.webp" alt="多轮修改后的角色：整体轮廓更接近，但神态与柔软的质感仍未达到预期。" width="750" height="1010" loading="lazy" decoding="async"><figcaption>改了好几轮之后，造型还是有些生硬。</figcaption></figure>
+<aside class="post-note"><p>这个牛牛前后花了约 <strong>37 分钟</strong>，包括等待、我提修改意见，以及它一轮一轮重做。说实话，花了这么久，最后效果还是一般。</p></aside>
+<h2 id="zh-s5"><span class="sec-num">05</span>再试一个旋转楼梯</h2>
+<p>记得从前有个朋友问我，不用 GH 的话，怎么在 Rhino 里建旋转楼梯。我突然觉得，这还真是个比较常见、又比较 tricky 的建模问题，于是想着试试看，AI 建出来会是什么效果。我当时只给了很笼统的提示词，不过大家可以给更多、更准确的描述，看看效果。</p>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>新开文件建一个旋转楼梯</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u07_stair.webp" alt="Claude 生成的旋转楼梯，平台附近的栏杆与通行关系仍需检查。" width="1460" height="1190" loading="lazy" decoding="async"><figcaption>Claude 生成的旋转楼梯，注意平台附近的栏杆。</figcaption></figure>
+<p>这一轮前后约 19 分钟，里面包括保存上一个文件、生成楼梯和检查结果。楼梯主体做出来了，材质和图层也分好了。不过看平台附近，栏杆的位置有问题，人上楼之后可能就被挡住了。楼梯和平台怎么接、楼板洞口开口方式，这些地方还要继续改。不过 AI 已经建了大部分，感觉手动快速删删改改也没问题了。在实际建模当中，应该还是很有用的。</p>
+<h2 id="zh-s6"><span class="sec-num">06</span>接着试 Grasshopper，第一版很乱</h2>
+<p>楼梯做好之后，我还想改层高、踏步数和旋转角度。如果每次都在聊天里重新说一遍，还是有点麻烦。于是继续让它做成 <strong>Grasshopper 文件</strong>，把这些参数接到滑块上，之后就可以自己拖着改。</p>
+<p>我当时用的 Prompt：<br>
+<em>你把这个文件先存一下 然后用GH建旋转楼梯 这样我可以调整参数</em></p>
+<p>它确实把电池和连线都建出来了。但第一眼看到画布，有点头疼：电池挤在一起，线从这边跨到那边。想找一个参数，还得先研究一下它到底放在哪里。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u08_gh_mess.webp" alt="整理前的 Grasshopper 画布局部：组件密集，连线大量交叉。" width="1070" height="640" loading="lazy" decoding="async"><figcaption>第一版 GH 画布局部，电池和连线都挤在一起。</figcaption></figure>
+<p>先不管排版，这一版确实能用，而且所有 sliders 都有名称，还是很好调整的。我依次改了层高、踏步数、总旋转角和外半径，观察到 Rhino 里的楼梯都跟着变，说明这个参数化控制流还是很稳定的，没有太大的 Bug。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u13_gh_stair.webp" alt="Grasshopper 生成的旋转楼梯。" width="1440" height="1333" loading="lazy" decoding="async"><figcaption>Grasshopper 生成的旋转楼梯。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u09_sliders.webp" alt="放大参数区：层高、踏步数、总旋转角与外半径都可以通过滑块调整。" width="850" height="670" loading="lazy" decoding="async"><figcaption>层高、踏步数、总旋转角和外半径，接到了这些滑块上。</figcaption></figure>
+<p>参数能动之后，我就让它整理一下画布。不然过几天再打开，恐怕又要从头看一遍。</p>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>你能把gh文件整理一下嘛 现在看着一团乱麻</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u10_gh_groups.webp" alt="整理后的画布局部：参数与几何按功能分组，阅读关系更清楚。" width="1050" height="565" loading="lazy" decoding="async"><figcaption>分组、加注释之后，清楚多了。</figcaption></figure>
+<aside class="post-note"><p>第一版生成加上参数检查，约 <strong>9 分钟</strong>。后面光是整理画布，又花了 <strong>8 分钟以上</strong>。这部分时间也得算进去。</p></aside>
+<p>整理后清楚多了。这里让我很震惊，因为它自动地将每个组都打包好了，也写好了注释，甚至能改变连线的显示方式。有些线显示得更浅，这样让整个画布更加整洁，主次明显。我觉得，AI 建模还是应该与 GH 结合，这样比较理想。首先，像 Claude Code 或者 Codex 这些智能体更擅长编程，GH 其实就是图形化编程，所以它们做起来更加得心应手；其次，有参数控制，建出来的模型可以根据需求而改变，不会重复使用大量 tokens 来改一个直接在 Rhino 里建的模型。</p>
+<h2 id="zh-s7"><span class="sec-num">07</span>让它在 GH 里写个生命游戏</h2>
+<p>除了让 AI 一个一个摆电池，还可以让它在 C# 或 Python 组件里直接写脚本，实现更加复杂的算法。我试了经典的算法“生命游戏”（Game of Life）：网格里的每个格子代表一个细胞，每次触发，根据周围细胞的状态计算下一代。</p>
+<div class="post-prompt"><div class="post-prompt-label">我用的 Prompt</div><div class="post-prompt-body"><p>你使用GH中的c#元件写一个Game of life 需要使用persistent variables 并使用trigger激发evolve</p></div></div>
+<p>这次它用的是 C# 组件，外面接按钮、布尔开关和参数滑块。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u11_life.webp" alt="左：Rhino 中的生命游戏网格；右：C# 组件和触发器。同一时刻的两个窗口裁切并排。" width="1600" height="550" loading="lazy" decoding="async"><figcaption>左边是生命游戏网格，右边是 C# 组件和触发器。同一时刻的两个窗口裁切并排。</figcaption></figure>
+<p>从开始生成脚本到调试好，约 <strong>7 分钟</strong>，网格就跑起来了，而且运行良好，我很惊叹。打开 C# 组件，也可以看到内部 Script 的初始化、每一代的计算和几何输出分别是怎么写的。对想学脚本但还不太熟的朋友，这种小例子也可以拿来拆着看。</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u14_life_script.webp" alt="C# 脚本局部：细胞演化、存活数量统计，以及网格输出。" width="1600" height="1050" loading="lazy" decoding="async"><figcaption>C# 脚本局部：细胞演化、存活数量统计，以及网格输出。</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u15_life_evolution.gif" alt="生命游戏实际运行，原速演示，8 秒循环。" width="720" height="720" loading="lazy" decoding="async"><figcaption>生命游戏实际运行，原速演示，8 秒循环。</figcaption></figure>
+<h2 id="zh-s8">下篇再换几种 AI 试试</h2>
+<p>这几个例子里，我觉得水壶和楼梯已经可以拿来做初稿，后面再自己改。牛牛就差得比较多，暂时没有达到我想要的效果。我觉得，GH 的参数化和脚本组件，是使用 AI 在 Rhino 里建模的最佳方式。</p>
+<p>下篇展示一下我试过的 Codex，以及国产大模型 GLM 和 DeepSeek。本地模型我也装了，不过没有成功让它完成建模，具体卡在哪里，也一起放出来，供大家参考。</p>
+<h3>官方资料</h3>
+<ul>
+<li><a href="https://mcneel.github.io/RhinoAI/docs/getting-started/cc-plugin/" target="_blank" rel="noopener">Rhino MCP 官方安装与连接说明</a></li>
+<li><a href="https://github.com/mcneel/RhinoAI" target="_blank" rel="noopener">McNeel RhinoAI 项目与示例</a></li>
+</ul>
+            </div>
+            <div class="post-body" data-lang="en" lang="en">
+<p>Hello, friends! A lot has changed. My last update here was six years ago. When I started this WeChat Official Account, I was an undergrad. Now I'm close to finishing my PhD. Along the way I did share some things, but I felt video was more direct, so I posted a series of videos on Bilibili about using C# in Rhino. Now I'm picking the WeChat Official Account back up to write more blog posts, but the main focus will shift from Grasshopper (GH) to coding + AI.</p>
+<p>The posts here will mostly be condensed, illustrated versions of each of my upcoming videos. I'll lean on the almighty power of AI to write them quickly, so some parts will inevitably have a bit of that stiff AI tone. But for the sake of spreading knowledge quickly, I think that's acceptable.</p>
+<p>Without further ado, this time I want to share how to install Rhino MCP and let an AI agent do the modeling for us in Rhino. First how to install it, then a few examples to see how it does. I tried several: modeling a kettle from a photo, making the cow from <em>Niu Lai</em> (《牛来》), generating a spiral staircase, and using Grasshopper to turn the staircase into a model with adjustable parameters. I tried AIs from both China and abroad, including Claude Code, Codex, GLM and DeepSeek, and at the end I also messed around with a local model (not very successful; local deployment still has a long way to go). You can compare the results yourselves.</p>
+<p>There's a lot of content, so I've split it into two parts. Part 1 covers installation and a few examples with Claude; Part 2 looks at other AIs. If you've already installed it, you can skip straight to section 3 for the kettle.</p>
+<h2 id="en-s1"><span class="sec-num">01</span>First, what MCP does</h2>
+<p>MCP stands for Model Context Protocol. It's really a set of communication rules that lets an AI agent talk to other programs, and through that, get them to do things. This Rhino workflow starts a local server, and the AI and Rhino talk to each other through a local address, much like visiting a website. If your copy of Rhino is cracked by blocking it with a firewall, this feature may be restricted. Once the AI agent and Rhino are connected through the MCP bridge, the agent can call Rhino's tools directly, read the current model, run modeling operations, and even switch views, take screenshots, and keep revising based on the results. We describe what we want in the chat window, and the model gets generated automatically in Rhino, sparing everyone the pain of modeling.</p>
+<aside class="post-note"><p>Three things are easy to mix up here: the base large language <strong>model</strong> understands the request, the AI <strong>client</strong> is where we give instructions and where tools get called, and <strong>Rhino</strong> does the modeling. MCP is the bridge that connects them.</p></aside>
+<p>Get <strong>Rhino 8</strong> ready first. Here I'll demo with Fable 5 / 5.1 in <strong>Claude Code</strong>, and for some tasks I also turned on Ultracode's multi-agent feature, which means letting several AIs split up the work. All the times below were measured with this setup.</p>
+<h2 id="en-s2"><span class="sec-num">02</span>Installation and connection</h2>
+<p><strong>Step 1: install the Rhino plugin.</strong><br>
+In the Rhino command line, type <strong>PackageManager</strong>, search for Rhino-MCP, and find <strong>Rhino-MCP-Platform</strong>. Note that the search results include plugins with very similar names, so look for <strong>made by McNeel</strong> in the description. Click Install, and restart Rhino once it's installed.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u01_package.webp" alt="Look for Rhino-MCP-Platform and made by McNeel." width="765" height="380" loading="lazy" decoding="async"><figcaption>Look for Rhino-MCP-Platform; the description says made by McNeel.</figcaption></figure>
+<p><strong>Step 2: connect the AI client.</strong><br>
+In the Rhino command line, type <strong>MCPConnect</strong>. The window lists the clients it detects; click the matching Install button to configure one. In the image below, Claude Code already shows Installed, which means it's set up; Codex hasn't been installed yet.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u02_connect.webp" alt="MCPConnect: configure the connection for clients you already have installed." width="1150" height="560" loading="lazy" decoding="async"><figcaption>The MCPConnect window; Claude Code already shows Installed.</figcaption></figure>
+<p>If your interface looks different and there's no Install page, switch to Prompt, copy the configuration prompt it generates, and send it to the AI client you want to use. Have the client configure itself following that prompt, then restart the client. Where this option lives may change in future versions; I've linked the official instructions at the end.</p>
+<p><strong>Step 3: start the service and test the connection.</strong><br>
+Back in Rhino, type <strong>MCPStart</strong> in the command line. The Log above will show which local port the MCP Server started on. Send the connection info to the AI and have it check:</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u12_server_log.webp" alt="After running MCPStart, the command area shows the server address: http://localhost:10500/." width="713" height="120" loading="lazy" decoding="async"><figcaption>After running MCPStart, the command area shows the server address: http://localhost:10500/.</figcaption></figure>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>MCP server currently running on http://localhost:10500/ please help me connect to rhino mcp and check the connection</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u03_connected.webp" alt="Once the connection test passes, confirm the tools work with a real operation." width="1330" height="405" loading="lazy" decoding="async"><figcaption>After the connection check passes, have it build a small model to try it out.</figcaption></figure>
+<p>Once connected, you can have it make something small as a test. You can also type <strong>MCPHelp</strong> to open the official docs for instructions and updates (you might need a VPN to get past the Great Firewall).</p>
+<h2 id="en-s3"><span class="sec-num">03</span>First example: modeling a kettle from a photo</h2>
+<p>Let's start with a kettle. I sent Claude Code the photo of the glass electric kettle from McNeel's official examples, and the request was just one line:</p>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>Model this image in Rhino</p></div></div>
+<p>Here's what it looks like in practice. Rhino is open on the left, and Claude's chat and task window is on the right. On the right you can see what it's analyzing and how it plans to build; on the left you can see the model take shape step by step. No copying code back and forth: it calls the modeling operations itself.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u04_kettle_workflow.webp" alt="The workspace, captured at one moment: Rhino on the left shows the kettle, Claude on the right shows the modeling tasks and script flow." width="1920" height="927" loading="lazy" decoding="async"><figcaption>The interface, captured at one moment: Rhino on the left, Claude's task window on the right.</figcaption></figure>
+<p>This round had the multi-agent feature on. It first looked at the reference image and broke the kettle into parts: body, base, top, handle and so on. Then it wrote a Rhino Python script for each, ran them to generate the geometry, and finally took screenshots from a few angles to check. While it's running, you can also look at the task list to see whether it misunderstood anything from the start.</p>
+<aside class="post-note"><p>From sending the request until the complete kettle body was ready to look at, I waited about <strong>8–9 minutes</strong>. Including the view changes, display tweaks and checks afterwards, it took about <strong>14 minutes</strong> in total. That's the time for my whole round, including waiting and checking.</p></aside>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u05_kettle_result.webp" alt="Left: the kettle generated this time; right: the reference photo. Two crops placed side by side to compare the handle and proportions." width="1108" height="560" loading="lazy" decoding="async"><figcaption>Left is the result, right is the reference. Two crops side by side for easy comparison.</figcaption></figure>
+<p>From a distance it's not bad: the glass body, black handle and base are all there. But compare it closely with the original and the handle's width at the top and bottom is wrong, and the button and some local proportions are off too. Still, modeling completely hands-free is a lot of fun.</p>
+<p>You can try to keep revising it; just describe what you want and what's wrong clearly. If you only say "it doesn't look like it," it will have a hard time knowing what you want changed. The model is already split into layers, so if some parts are faster to fix by hand, you can carry on yourself.</p>
+<h2 id="en-s4"><span class="sec-num">04</span>Niu Lai: a lot of fiddling, mediocre results</h2>
+<p>After the kettle, I wanted to have some fun, so I tried something less regular. <em>Niu Lai</em> happened to be really popular at the time, so I gave it a reference image of the cow character and asked it to model from that. In the first version, the head, horns and body were all there, but it was basically spheres, cylinders and other basic geometry stuck together. Compared with the reference, the form was still pretty far off.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u06_cow_first.webp" alt="Left: first draft of the Niu Lai character; right: the reference. Two crops from the same moment placed side by side; the draft still clearly looks like a combination of basic geometric shapes." width="794" height="565" loading="lazy" decoding="async"><figcaption>Left is the first version, right is the reference. Two crops from the same moment placed side by side.</figcaption></figure>
+<p>Next I asked it to use SubD, hoping to make the shape softer. After that I revised it for several more rounds, working on the head, muzzle, eyes, eyebrows, arms and belly. It was better than the first version, but still didn't quite get there, and the character's expression wasn't right either. This shows the model's ability is still limited; maybe Codex would do better.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u06b_cow_later.webp" alt="The character after multiple rounds of edits: the overall silhouette is closer, but the expression and soft feel still fall short of expectations." width="750" height="1010" loading="lazy" decoding="async"><figcaption>After several rounds of edits, the form is still a bit stiff.</figcaption></figure>
+<aside class="post-note"><p>The cow took about <strong>37 minutes</strong> in total, including waiting, me giving feedback, and it redoing round after round. Honestly, after all that time, the result was still just so-so.</p></aside>
+<h2 id="en-s5"><span class="sec-num">05</span>Next, a spiral staircase</h2>
+<p>I remember a friend once asked me how to model a spiral staircase in Rhino without GH. It suddenly struck me that this really is a fairly common and rather tricky modeling problem, so I wanted to try it and see what the AI would come up with. At the time I gave only a very vague prompt, but you can give it a fuller, more precise description and see how it does.</p>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>open a new file and build a spiral staircase</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u07_stair.webp" alt="The spiral staircase Claude generated; the railings and circulation near the landing still need checking." width="1460" height="1190" loading="lazy" decoding="async"><figcaption>The spiral staircase Claude generated; note the railing near the landing.</figcaption></figure>
+<p>This round took about 19 minutes in total, including saving the previous file, generating the staircase and checking the result. The main body of the stair got built, and the materials and layers are sorted out properly. But near the landing, the railing is in the wrong place: once you walk up, it might block your way. How the stair meets the landing and how the floor opening is cut still need more work. Still, the AI has built most of it, and I feel some quick manual deleting and tweaking would take care of the rest. In real modeling work, this should still be quite useful.</p>
+<h2 id="en-s6"><span class="sec-num">06</span>Then Grasshopper: the first version was a mess</h2>
+<p>Once the staircase was done, I also wanted to change the floor height, number of steps and rotation angle. Re-describing everything in chat each time would still be a bit of a hassle. So I had it go further and make a <strong>Grasshopper file</strong>, wiring these parameters to sliders so I could just drag them and make changes myself.</p>
+<p>The prompt I used at the time:<br>
+<em>save this file first then build the spiral staircase in GH so I can adjust the parameters</em></p>
+<p>It did build all the components and wires. But my first look at the canvas gave me a bit of a headache: components crammed together, wires running from one side to the other. To find a parameter, you'd first have to work out where it was even placed.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u08_gh_mess.webp" alt="A section of the Grasshopper canvas before cleanup: dense components and lots of crossing wires." width="1070" height="640" loading="lazy" decoding="async"><figcaption>A section of the first GH canvas; components and wires all crammed together.</figcaption></figure>
+<p>Layout aside, this version does work, and all the sliders are named, so it's easy to adjust. I changed the floor height, number of steps, total rotation angle and outer radius one by one, and watched the staircase in Rhino follow along each time, which shows this parametric setup is quite stable, with no major bugs.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u13_gh_stair.webp" alt="The spiral staircase generated by Grasshopper." width="1440" height="1333" loading="lazy" decoding="async"><figcaption>The spiral staircase generated by Grasshopper.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u09_sliders.webp" alt="Zoomed in on the parameter area: floor height, number of steps, total rotation angle and outer radius can all be adjusted with sliders." width="850" height="670" loading="lazy" decoding="async"><figcaption>Floor height, number of steps, total rotation angle and outer radius are wired to these sliders.</figcaption></figure>
+<p>Once the parameters worked, I asked it to tidy up the canvas. Otherwise, if I opened it again in a few days, I'd probably have to read through the whole thing from scratch.</p>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>can you tidy up the gh file? right now it looks like a tangled mess</p></div></div>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u10_gh_groups.webp" alt="A section of the canvas after cleanup: parameters and geometry grouped by function, making the relationships easier to read." width="1050" height="565" loading="lazy" decoding="async"><figcaption>After grouping and adding notes, it's much clearer.</figcaption></figure>
+<aside class="post-note"><p>Generating the first version plus checking the parameters took about <strong>9 minutes</strong>. Tidying up the canvas alone took <strong>more than 8 minutes</strong> on top of that. That time has to be counted too.</p></aside>
+<p>It's much clearer after the cleanup. This honestly blew me away, because it automatically organized everything into groups, wrote the annotations, and even changed how the wires are displayed. Some wires are shown lighter, which makes the whole canvas tidier, with a clear hierarchy. I think AI modeling really should be combined with GH; that's the more ideal setup. First, agents like Claude Code or Codex are better at programming, and GH is really just visual programming, so it comes more naturally to them. Second, with parametric control, the model you build can change to fit your needs, instead of burning lots of tokens over and over to revise a model built directly in Rhino.</p>
+<h2 id="en-s7"><span class="sec-num">07</span>Having it write a Game of Life in GH</h2>
+<p>Besides having the AI place components one by one, you can also have it write scripts directly inside a C# or Python component to implement more complex algorithms. I tried the classic "Game of Life" algorithm: each square in the grid represents a cell, and on each trigger, the next generation is computed from the states of the surrounding cells.</p>
+<div class="post-prompt"><div class="post-prompt-label">The prompt I used</div><div class="post-prompt-body"><p>use the c# component in GH to write a Game of life, it needs to use persistent variables and use a trigger to fire evolve</p></div></div>
+<p>This time it used a C# component, with a button, a Boolean toggle and parameter sliders wired into it.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u11_life.webp" alt="Left: the Game of Life grid in Rhino; right: the C# component and trigger. Two windows captured at the same moment, cropped and placed side by side." width="1600" height="550" loading="lazy" decoding="async"><figcaption>Left is the Game of Life grid, right is the C# component and trigger. Two windows captured at the same moment, cropped and placed side by side.</figcaption></figure>
+<p>It took about <strong>7 minutes</strong> from starting to generate the script to finishing debugging, and the grid was up and running, and working well. I was amazed. Open the C# component and you can also see how the script inside handles initialization, each generation's computation, and the geometry output. For friends who want to learn scripting but aren't very familiar with it yet, small examples like this are good to take apart and study.</p>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u14_life_script.webp" alt="Part of the C# script: cell evolution, live cell count, and grid output." width="1600" height="1050" loading="lazy" decoding="async"><figcaption>Part of the C# script: cell evolution, live cell count, and grid output.</figcaption></figure>
+<figure class="post-figure"><img src="../assets/blog/rhino-ai-modeling-1/u15_life_evolution.gif" alt="The Game of Life actually running, shown at real speed, in an 8-second loop." width="720" height="720" loading="lazy" decoding="async"><figcaption>The Game of Life actually running, shown at real speed, in an 8-second loop.</figcaption></figure>
+<h2 id="en-s8">In Part 2: trying a few other AIs</h2>
+<p>Of these examples, I think the kettle and the staircase can already serve as first drafts that I can then revise myself. The cow fell quite far short; for now, it isn't what I wanted. I think GH's parametrics and script components are the best way to use AI for modeling in Rhino.</p>
+<p>In Part 2 I'll show Codex, which I also tried, as well as the Chinese models GLM and DeepSeek. I also installed a local model, but didn't manage to get it to finish the modeling. I'll share exactly where it got stuck too, for your reference.</p>
+<h3>Official resources</h3>
+<ul>
+<li><a href="https://mcneel.github.io/RhinoAI/docs/getting-started/cc-plugin/" target="_blank" rel="noopener">Rhino MCP official installation and connection guide</a></li>
+<li><a href="https://github.com/mcneel/RhinoAI" target="_blank" rel="noopener">McNeel RhinoAI project and examples</a></li>
+</ul>
+            </div>
+            <nav class="post-series" aria-label="Series"><a class="post-series-next" href="rhino-ai-modeling-2.html"><small><span data-lang="zh" lang="zh-CN">下一篇</span><span data-lang="en" lang="en">Next</span></small><span data-lang="zh" lang="zh-CN">用AI在Rhino里建模（下）</span><span data-lang="en" lang="en">Modeling in Rhino with AI (Part 2)</span></a></nav>
+          </div>
+        </div>
+      </article>
+    </main>
+    <script src="../assets/js/blog.js"></script>
+  </body>
+</html>
