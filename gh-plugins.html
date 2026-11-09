@@ -8,7 +8,7 @@
     <link rel="canonical" href="https://chenminghe0126.github.io/gh-plugins.html">
     <link rel="stylesheet" href="assets/css/site.css">
     <link rel="stylesheet" href="assets/css/blog.css">
-    <link rel="stylesheet" href="assets/css/gh-plugins.css?v=e6c9fb3426f1">
+    <link rel="stylesheet" href="assets/css/gh-plugins.css?v=16a99cf38438">
     <script>
 (function () {
   var q = new URLSearchParams(location.search).get("lang"), s = null;
@@ -51,22 +51,116 @@
         </div>
       </section>
       <section class="plugin-list" aria-label="Grasshopper plug-ins">
-        <a class="plugin" href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noopener noreferrer" aria-labelledby="deadfish-title">
-          <img class="plugin-icon" src="assets/img/plugins/deadfish-icon.png" alt="" width="32" height="32">
-          <div class="plugin-copy">
-            <h2 id="deadfish-title">DeadFish</h2>
-            <p><span data-lang="zh" lang="zh-CN">差异生长、正交分支与最短路径工具。</span><span data-lang="en" lang="en">Tools for differential growth, orthogonal branching and shortest paths.</span></p>
+        <details class="plugin" id="deadfish">
+          <summary class="plugin-summary" aria-labelledby="deadfish-title">
+            <img class="plugin-icon" src="assets/img/plugins/deadfish-icon.png" alt="" width="32" height="32">
+            <span class="plugin-copy">
+              <span class="plugin-name" id="deadfish-title">DeadFish</span>
+              <span class="plugin-teaser"><span data-lang="zh" lang="zh-CN">差异生长、正交分支与最短路径工具。</span><span data-lang="en" lang="en">Tools for differential growth, orthogonal branching and shortest paths.</span></span>
+            </span>
+            <span class="plugin-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="plugin-panel">
+            <div class="plugin-description">
+              <p><span data-lang="zh" lang="zh-CN">DeadFish 将差异生长、正交分支和 Dijkstra 最短路径封装为 Grasshopper 组件：差异生长生成可调密度的空间填充纹理，正交分支生成直角树状结构，Dijkstra 在节点与连线构成的图中寻找最短路径。</span><span data-lang="en" lang="en">DeadFish brings three algorithms into Grasshopper: differential growth generates space-filling patterns with adjustable density; orthogonal branching creates rectangular, tree-like structures; and Dijkstra finds shortest paths through a graph of nodes and connections.</span></p>
+              <p><span data-lang="zh" lang="zh-CN">另提供基于 Geometry3Sharp 的网格减面与体素化工具，用于形态生成和几何处理。</span><span data-lang="en" lang="en">Additional tools built on Geometry3Sharp provide mesh reduction and voxelization for geometry processing.</span></p>
+            </div>
+            <p class="plugin-actions"><a class="plugin-link" href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noopener noreferrer">food4Rhino <span aria-hidden="true">↗</span></a></p>
+            <div class="plugin-gallery">
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-01-differential-growth-surface.webp" alt="Differential growth: a continuous pattern over a surface." width="808" height="686" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">差异生长：在曲面上生成连续纹理。</span><span data-lang="en" lang="en">Differential growth: a continuous pattern over a surface.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-02-differential-growth-sample.webp" alt="A physical sample with differential-growth texture." width="1072" height="797" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">差异生长纹理的实体样件。</span><span data-lang="en" lang="en">A physical sample with differential-growth texture.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-03-dijkstra-mesh.webp" alt="Dijkstra: a shortest path through mesh vertices." width="967" height="819" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Dijkstra：网格节点之间的最短路径。</span><span data-lang="en" lang="en">Dijkstra: a shortest path through mesh vertices.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-04-dijkstra-surface.webp" alt="Displaying a shortest path on the surface." width="910" height="819" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">最短路径在曲面上的显示。</span><span data-lang="en" lang="en">Displaying a shortest path on the surface.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-05-dijkstra-network.webp" alt="A branching network formed from shortest paths." width="864" height="809" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">由最短路径构成的分支网络。</span><span data-lang="en" lang="en">A branching network formed from shortest paths.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-06-dijkstra-network-result.webp" alt="A solid representation of the path network." width="888" height="811" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">路径网络的实体化显示。</span><span data-lang="en" lang="en">A solid representation of the path network.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-07-orthogonal-branching.webp" alt="Orthogonal branching: a structure grown along perpendicular directions." width="851" height="782" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">正交分支：沿直角方向生成分支结构。</span><span data-lang="en" lang="en">Orthogonal branching: a structure grown along perpendicular directions.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/deadfish-08-geometry3sharp.webp" alt="Geometry3Sharp: mesh reduction and voxelization." width="2112" height="1000" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Geometry3Sharp：网格减面与体素化。</span><span data-lang="en" lang="en">Geometry3Sharp: mesh reduction and voxelization.</span></figcaption>
+              </figure>
+            </div>
           </div>
-          <span class="plugin-link">food4Rhino <span aria-hidden="true">↗</span></span>
-        </a>
-        <a class="plugin" href="https://www.food4rhino.com/en/app/moyu?lang=en" target="_blank" rel="noopener noreferrer" aria-labelledby="moyu-title">
-          <img class="plugin-icon" src="assets/img/plugins/moyu-icon.png" alt="" width="32" height="32">
-          <div class="plugin-copy">
-            <h2 id="moyu-title">Moyu</h2>
-            <p><span data-lang="zh" lang="zh-CN">2D / 3D 拓扑优化，以及四款 Rhino 小游戏。</span><span data-lang="en" lang="en">2D / 3D topology optimization and four games inside Rhino.</span></p>
+        </details>
+        <details class="plugin" id="moyu">
+          <summary class="plugin-summary" aria-labelledby="moyu-title">
+            <img class="plugin-icon" src="assets/img/plugins/moyu-icon.png" alt="" width="32" height="32">
+            <span class="plugin-copy">
+              <span class="plugin-name" id="moyu-title">Moyu</span>
+              <span class="plugin-teaser"><span data-lang="zh" lang="zh-CN">2D / 3D 拓扑优化，以及四款 Rhino 小游戏。</span><span data-lang="en" lang="en">2D / 3D topology optimization and four games inside Rhino.</span></span>
+            </span>
+            <span class="plugin-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="plugin-panel">
+            <div class="plugin-description">
+              <p><span data-lang="zh" lang="zh-CN">提供 2D 像素与 3D 体素拓扑优化。定义设计域、荷载、支撑和保留区域后，用 SIMP 方法迭代调整材料密度，在材料用量约束下提高结构刚度；结果可输出为轮廓曲线、体素或等值面网格。</span><span data-lang="en" lang="en">Moyu offers 2D pixel and 3D voxel topology optimization. Define the domain, loads, supports and preserved regions, then use SIMP to iteratively redistribute material density for stiffness under a material-volume constraint. Results can be extracted as contour curves, voxels or an isosurface mesh.</span></p>
+              <p><span data-lang="zh" lang="zh-CN">另有叠楼、贪吃蛇、打砖块和雨燕四款 Rhino 视口游戏，均带老板键，可切换成体量、景观、立面或剖面研究画面。</span><span data-lang="en" lang="en">It also includes four Rhino viewport games: falling blocks, Snake, brick breaker and a flying game. Each has a boss key that switches to a massing, landscape, facade or section study.</span></p>
+            </div>
+            <p class="plugin-actions"><a class="plugin-link" href="https://www.food4rhino.com/en/app/moyu?lang=en" target="_blank" rel="noopener noreferrer">food4Rhino <span aria-hidden="true">↗</span></a></p>
+            <div class="plugin-gallery">
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-01-topology-2d.webp" alt="2D SIMP topology optimization of an L-shaped bracket." width="712" height="712" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">2D SIMP 拓扑优化：带孔 L 形支架。</span><span data-lang="en" lang="en">2D SIMP topology optimization of an L-shaped bracket.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-02-topology-3d.webp" alt="Material distribution in a 3D SIMP topology optimization result." width="1000" height="680" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">3D SIMP 拓扑优化：支架的材料分布。</span><span data-lang="en" lang="en">Material distribution in a 3D SIMP topology optimization result.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-03-voxstack.webp" alt="VoxStack: 3D blocks and Gumball controls." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">VoxStack：三维积木与 Gumball 操作界面。</span><span data-lang="en" lang="en">VoxStack: 3D blocks and Gumball controls.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-04-voxstack-boss.webp" alt="VoxStack boss mode: an architectural massing study." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">VoxStack 老板模式：建筑体量研究。</span><span data-lang="en" lang="en">VoxStack boss mode: an architectural massing study.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-05-serpentine.webp" alt="Serpentine: Snake from a first-person view on a surface." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Serpentine：曲面上的第一人称贪吃蛇。</span><span data-lang="en" lang="en">Serpentine: Snake from a first-person view on a surface.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-06-serpentine-boss.webp" alt="Serpentine boss mode: a terrain and landscape study." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Serpentine 老板模式：地形与景观研究。</span><span data-lang="en" lang="en">Serpentine boss mode: a terrain and landscape study.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-07-rebound.webp" alt="Rebound: a brick-breaking game in a facade wall." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Rebound：立面砖墙中的打砖块游戏。</span><span data-lang="en" lang="en">Rebound: a brick-breaking game in a facade wall.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-08-rebound-boss.webp" alt="Rebound boss mode: a facade study." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Rebound 老板模式：立面分析。</span><span data-lang="en" lang="en">Rebound boss mode: a facade study.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-09-swift.webp" alt="Swift: flying through an architectural section." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Swift：穿过建筑剖面的飞行游戏。</span><span data-lang="en" lang="en">Swift: flying through an architectural section.</span></figcaption>
+              </figure>
+              <figure class="post-figure">
+                <img src="assets/img/plugins/examples/moyu-10-swift-boss.webp" alt="Swift boss mode: daylight and airflow diagrams in section." width="1280" height="720" loading="lazy" decoding="async">
+                <figcaption><span data-lang="zh" lang="zh-CN">Swift 老板模式：剖面光照与气流示意。</span><span data-lang="en" lang="en">Swift boss mode: daylight and airflow diagrams in section.</span></figcaption>
+              </figure>
+            </div>
           </div>
-          <span class="plugin-link">food4Rhino <span aria-hidden="true">↗</span></span>
-        </a>
+        </details>
       </section>
     </main>
     <script src="assets/js/blog.js"></script>
