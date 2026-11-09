@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-08",
+  "title": {
+    "zh": "一行代码不写，用 Agent 开发 Grasshopper 插件",
+    "en": "Building a Grasshopper Plug-in with an AI Agent, Without Writing a Line of Code"
+  },
+  "summary": {
+    "zh": "从拓扑优化到 Rhino 摸鱼游戏，分享我一行代码没写，用 Agent 开发、测试并发布定制化 GH 插件的过程。",
+    "en": "From topology optimization to games inside Rhino: how I used an AI agent to build, test and publish a custom Grasshopper plug-in without writing code."
+  },
+  "series": {
+    "zh": "Agent 开发实录",
+    "en": "Building with AI agents"
+  },
+  "author": "Chenming He",
+  "cover": "images/cover.png",
+  "tags": [
+    "AI",
+    "Grasshopper",
+    "Rhino",
+    "Agentic Coding",
+    "Moyu"
+  ],
+  "links": {
+    "bilibili": "",
+    "youtube": "",
+    "wechat": ""
+  }
+}

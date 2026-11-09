@@ -309,7 +309,7 @@ def build_post(post, posts):
         url = (post.get("links") or {}).get(key)
         if url:
             link_btns.append(f'<a class="post-link-btn" href="{ESC(url)}" target="_blank" rel="noopener">{both(UI["links"][key])}</a>')
-    links_html = f'<p class="post-links">{"".join(link_btns)}</p>' if link_btns else ""
+    links_html = f'            <p class="post-links">{"".join(link_btns)}</p>' if link_btns else ""
 
     toc_html = "".join(
         f'<ol data-lang="{l}" lang="{HTML_LANG[l]}">' + "".join(f'<li><a href="#{a}">{ESC(x)}</a></li>' for a, x in tocs[l]) + "</ol>"
@@ -321,7 +321,7 @@ def build_post(post, posts):
         nav_items.append(f'<a class="post-series-prev" href="{prev_p["slug"]}.html"><small>{both(UI["prev"])}</small>{both({l: ESC(prev_p["title"][l]) for l in LANGS})}</a>')
     if next_p:
         nav_items.append(f'<a class="post-series-next" href="{next_p["slug"]}.html"><small>{both(UI["next"])}</small>{both({l: ESC(next_p["title"][l]) for l in LANGS})}</a>')
-    series_nav = f'<nav class="post-series" aria-label="Series">{"".join(nav_items)}</nav>' if nav_items else ""
+    series_nav = f'            <nav class="post-series" aria-label="Series">{"".join(nav_items)}</nav>' if nav_items else ""
 
     main = f"""    <main id="main" class="page-shell blog-shell">
       <div class="post-topbar">
@@ -336,7 +336,7 @@ def build_post(post, posts):
             <h1>{both({l: ESC(t[l]) for l in LANGS})}</h1>
             <p class="post-dek">{both({l: ESC(s[l]) for l in LANGS})}</p>
             <p class="post-meta">{both(meta_line)}</p>
-            {links_html}
+{links_html}
           </div>
         </header>
         <div class="post-layout">
@@ -348,7 +348,7 @@ def build_post(post, posts):
             <div class="post-body" data-lang="en" lang="en">
 {bodies["en"]}
             </div>
-            {series_nav}
+{series_nav}
           </div>
         </div>
       </article>
