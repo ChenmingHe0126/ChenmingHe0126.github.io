@@ -21,6 +21,7 @@ import re
 import shutil
 from datetime import date
 from pathlib import Path
+from urllib.parse import quote
 
 import markdown
 from PIL import Image
@@ -295,6 +296,10 @@ def build_post(post, posts):
     cover_name = Path(post["cover"]).name
     cover_pub, cw, ch = images[cover_name]
     og_image = cover_jpg(slug, post["dir"] / "images" / cover_name)
+    if post.get("cover_version"):
+        revision = quote(str(post["cover_version"]), safe="")
+        cover_pub += f"?v={revision}"
+        og_image += f"?v={revision}"
 
     bodies, tocs, mins = {}, {}, {}
     for l in LANGS:

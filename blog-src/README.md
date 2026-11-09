@@ -47,4 +47,6 @@ blog-src/<slug>/
 
 The build converts PNG/JPG to WebP in `assets/blog/<slug>/` (GIFs are copied unchanged), adds `cover.jpg` for link previews, and fails loudly if an image path is wrong.
 
+When replacing a cover, set optional `cover_version` in `meta.json` to a content-hash token. This refreshes the cover URLs on the post, blog index and social sharing preview.
+
 Language: the 中文 / EN switch remembers the reader's choice. A link can force a language with `?lang=zh` or `?lang=en`. Otherwise the browser language decides.
