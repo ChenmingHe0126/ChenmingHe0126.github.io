@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GH Plug-in - Chenming He</title>
-    <meta name="description" content="Grasshopper plug-ins by Chenming He: DeadFish for generative patterns and graph exploration, and Moyu for topology optimization and games inside Rhino.">
+    <meta name="description" content="DeadFish and Moyu: Grasshopper plug-ins by Chenming He.">
     <link rel="canonical" href="https://chenminghe0126.github.io/gh-plugins.html">
     <link rel="stylesheet" href="assets/css/site.css">
     <link rel="stylesheet" href="assets/css/blog.css">
-    <link rel="stylesheet" href="assets/css/gh-plugins.css">
+    <link rel="stylesheet" href="assets/css/gh-plugins.css?v=e6c9fb3426f1">
     <script>
 (function () {
   var q = new URLSearchParams(location.search).get("lang"), s = null;
@@ -44,44 +44,29 @@
 
     <main id="main" class="page-shell plugins-shell">
       <section class="plugins-intro" aria-labelledby="plugins-title">
-        <div>
-          <h1 id="plugins-title">GH Plug-in</h1>
-          <p><span data-lang="zh" lang="zh-CN">我开发的 Grasshopper 插件：从生成设计、图网络与拓扑优化，到 Rhino 里的小游戏。</span><span data-lang="en" lang="en">My Grasshopper plug-ins: from generative design, graphs and topology optimization to games inside Rhino.</span></p>
-        </div>
+        <h1 id="plugins-title">GH Plug-in</h1>
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-set-lang="zh" lang="zh-CN">中文</button>
           <button type="button" data-set-lang="en" lang="en">EN</button>
         </div>
       </section>
       <section class="plugin-list" aria-label="Grasshopper plug-ins">
-        <article class="plugin" aria-labelledby="deadfish-title">
-          <figure class="plugin-figure">
-            <img src="assets/img/plugins/deadfish-branching.png" alt="Orthogonal branching geometry generated with DeadFish" width="851" height="782" loading="lazy" decoding="async">
-            <figcaption><span data-lang="zh" lang="zh-CN">DeadFish 正交分支案例</span><span data-lang="en" lang="en">An orthogonal branching study with DeadFish</span></figcaption>
-          </figure>
-          <h2 id="deadfish-title">DeadFish</h2>
-          <p class="plugin-summary"><span data-lang="zh" lang="zh-CN">从我硕士阶段的研究中发展而来的 Grasshopper 工具集，用于生成图案与图网络探索。主要包括差异生长、正交分支和 Dijkstra 最短路径，也提供网格减面与体素化工具。</span><span data-lang="en" lang="en">A Grasshopper toolkit for generative patterns and graph exploration, developed from my master&#x27;s research. It brings together differential growth, orthogonal branching and Dijkstra shortest paths, with additional tools for mesh reduction and voxelization.</span></p>
-          <ul class="plugin-tags">
-              <li><span data-lang="zh" lang="zh-CN">差异生长</span><span data-lang="en" lang="en">Differential growth</span></li>
-              <li><span data-lang="zh" lang="zh-CN">正交分支</span><span data-lang="en" lang="en">Orthogonal branching</span></li>
-              <li><span data-lang="zh" lang="zh-CN">最短路径</span><span data-lang="en" lang="en">Shortest paths</span></li>
-          </ul>
-          <p class="plugin-actions"><a class="plugin-link" href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noopener noreferrer"><span data-lang="zh" lang="zh-CN">前往 food4Rhino</span><span data-lang="en" lang="en">View on food4Rhino</span> <span aria-hidden="true">↗</span></a></p>
-        </article>
-        <article class="plugin" aria-labelledby="moyu-title">
-          <figure class="plugin-figure">
-            <img src="assets/img/plugins/moyu-topology.png" alt="A three-dimensional topology optimization result in Moyu" width="1000" height="680" loading="lazy" decoding="async">
-            <figcaption><span data-lang="zh" lang="zh-CN">Moyu 三维拓扑优化结果</span><span data-lang="en" lang="en">A 3D topology optimization result in Moyu</span></figcaption>
-          </figure>
-          <h2 id="moyu-title">Moyu</h2>
-          <p class="plugin-summary"><span data-lang="zh" lang="zh-CN">一个把实时 2D、3D 拓扑优化和四款 Rhino 视口小游戏放在一起的 Grasshopper 插件。可以用 SIMP 求解器探索材料分布，也可以玩叠楼、贪吃蛇、打砖块和雨燕；每款游戏都有老板键，一按切换成建筑研究画面。</span><span data-lang="en" lang="en">A Grasshopper plug-in combining live 2D and 3D topology optimization with four games inside the Rhino viewport. Explore material layouts with a SIMP solver, or take a break with falling blocks, Snake, brick breaker and a flying game—each with a boss key that switches to an architectural study.</span></p>
-          <ul class="plugin-tags">
-              <li><span data-lang="zh" lang="zh-CN">2D / 3D 拓扑优化</span><span data-lang="en" lang="en">2D / 3D topology optimization</span></li>
-              <li><span data-lang="zh" lang="zh-CN">Rhino 视口游戏</span><span data-lang="en" lang="en">Rhino viewport games</span></li>
-              <li><span data-lang="zh" lang="zh-CN">老板键</span><span data-lang="en" lang="en">Boss key</span></li>
-          </ul>
-          <p class="plugin-actions"><a class="plugin-link" href="https://www.food4rhino.com/en/app/moyu?lang=en" target="_blank" rel="noopener noreferrer"><span data-lang="zh" lang="zh-CN">前往 food4Rhino</span><span data-lang="en" lang="en">View on food4Rhino</span> <span aria-hidden="true">↗</span></a></p>
-        </article>
+        <a class="plugin" href="https://www.food4rhino.com/en/app/deadfish" target="_blank" rel="noopener noreferrer" aria-labelledby="deadfish-title">
+          <img class="plugin-icon" src="assets/img/plugins/deadfish-icon.png" alt="" width="32" height="32">
+          <div class="plugin-copy">
+            <h2 id="deadfish-title">DeadFish</h2>
+            <p><span data-lang="zh" lang="zh-CN">差异生长、正交分支与最短路径工具。</span><span data-lang="en" lang="en">Tools for differential growth, orthogonal branching and shortest paths.</span></p>
+          </div>
+          <span class="plugin-link">food4Rhino <span aria-hidden="true">↗</span></span>
+        </a>
+        <a class="plugin" href="https://www.food4rhino.com/en/app/moyu?lang=en" target="_blank" rel="noopener noreferrer" aria-labelledby="moyu-title">
+          <img class="plugin-icon" src="assets/img/plugins/moyu-icon.png" alt="" width="32" height="32">
+          <div class="plugin-copy">
+            <h2 id="moyu-title">Moyu</h2>
+            <p><span data-lang="zh" lang="zh-CN">2D / 3D 拓扑优化，以及四款 Rhino 小游戏。</span><span data-lang="en" lang="en">2D / 3D topology optimization and four games inside Rhino.</span></p>
+          </div>
+          <span class="plugin-link">food4Rhino <span aria-hidden="true">↗</span></span>
+        </a>
       </section>
     </main>
     <script src="assets/js/blog.js"></script>
