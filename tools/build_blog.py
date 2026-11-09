@@ -58,7 +58,7 @@ NAV = [
     ("blogs.html", "Blogs", "blogs"),
     ("publications.html", "Publications", None),
     ("cv.html", "CV", None),
-    ("https://www.food4rhino.com/en/app/deadfish", "DeadFish", None),
+    ("gh-plugins.html", "GH Plug-in", "plugins"),
     ("contact.html", "Contact", None),
 ]
 
